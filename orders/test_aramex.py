@@ -71,10 +71,10 @@ xml_payload = f"""<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/so
                   <v1:Reference1>Cust_100</v1:Reference1>
                   <v1:Reference2></v1:Reference2>
                   <v1:PartyAddress>
-                     <v1:Line1>456 Corniche El Nile</v1:Line1>
-                     <v1:Line2>Sidi Gaber</v1:Line2> <v1:Line3>Apt 4</v1:Line3>
-                     <v1:City>masr egedeeda</v1:City>
-                     <v1:StateOrProvinceCode>masr egdeeda</v1:StateOrProvinceCode>
+                     <v1:Line1>dhcuidiuu3i</v1:Line1>
+                     <v1:Line2>ehdioheoidhoeih</v1:Line2> <v1:Line3>Apt 4</v1:Line3>
+                     <v1:City>Minya</v1:City>
+                     <v1:StateOrProvinceCode>ihioh</v1:StateOrProvinceCode>
                      <v1:PostCode>21500</v1:PostCode>
                      <v1:CountryCode>EG</v1:CountryCode>
                   </v1:PartyAddress>

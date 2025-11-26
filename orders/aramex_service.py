@@ -59,7 +59,7 @@ class AramexService:
             due_date = datetime.now() + timedelta(days=3)
             due_date_str = due_date.strftime('%Y-%m-%dT%H:%M:%S')
 
-            # Unique HAWB
+            # Unique HAWB (Order ID + Timestamp)
             foreign_hawb = f"{order.external_id or order.id}-{int(time.time())}"
 
             # Items Description
@@ -72,25 +72,18 @@ class AramexService:
             if number_of_pieces < 1: number_of_pieces = 1
 
             # --- 2. PAYMENT & SERVICE LOGIC ---
-            is_cod = False
-            if hasattr(order, 'payment_method') and str(order.payment_method).lower() in ['cod', 'cash']:
-                 is_cod = True
+            # Always E-Commerce (CDS)
+            # Always Bill Shipper Account (P/ACCT)
+            # Always COD (Value in CashOnDeliveryAmount)
             
-            # --- REVERTED TO 'ACCT' ---
-            # PaymentType P = Shipper Pays
-            # PaymentOptions ACCT = Bill to Account
             payment_type = "P"
-            payment_options = "ACCT" 
-
-            if is_cod:
-                # COD: You pay shipping (Account), Driver collects item price.
-                services_string = "" 
-                cod_amount = f"{order.total_cost:.2f}"
-            else:
-                # Standard: You pay shipping (Account), No collection.
-                services_string = ""
-                cod_amount = "0"
-
+            payment_options = "ACCT"
+            product_type = "CDS"
+            
+            # CRITICAL FIX: Leave Services empty for CDS. The Amount triggers the collection.
+            services_string = "" 
+            
+            cod_amount = f"{order.total_cost:.2f}"
             customs_value = f"{order.total_cost:.2f}"
 
             # --- 3. CONSTRUCT XML PAYLOAD ---
@@ -206,7 +199,7 @@ class AramexService:
                               <v1:NumberOfPieces>{number_of_pieces}</v1:NumberOfPieces>
 
                               <v1:ProductGroup>DOM</v1:ProductGroup>
-                              <v1:ProductType>CDS</v1:ProductType>
+                              <v1:ProductType>{product_type}</v1:ProductType>
                               
                               <v1:PaymentType>{payment_type}</v1:PaymentType>
                               <v1:PaymentOptions>{payment_options}</v1:PaymentOptions>
