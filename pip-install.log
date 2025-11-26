@@ -1,0 +1,327 @@
+Using pip 25.3 from C:\Users\user\AppData\Local\Programs\Python\Python314\Lib\site-packages\pip (python 3.14)
+Non-user install because site-packages writeable
+Created temporary directory: C:\Users\user\AppData\Local\Temp\pip-build-tracker-waf4g38m
+Initialized build tracking at C:\Users\user\AppData\Local\Temp\pip-build-tracker-waf4g38m
+Created build tracker: C:\Users\user\AppData\Local\Temp\pip-build-tracker-waf4g38m
+Entered build tracker: C:\Users\user\AppData\Local\Temp\pip-build-tracker-waf4g38m
+Created temporary directory: C:\Users\user\AppData\Local\Temp\pip-install-jbgmavv8
+Created temporary directory: C:\Users\user\AppData\Local\Temp\pip-ephem-wheel-cache-kidjmrug
+1 location(s) to search for versions of djangorestframework:
+* https://pypi.org/simple/djangorestframework/
+Fetching project page and analyzing links: https://pypi.org/simple/djangorestframework/
+Getting page https://pypi.org/simple/djangorestframework/
+Found index url https://pypi.org/simple/
+Looking up "https://pypi.org/simple/djangorestframework/" in the cache
+Request header has "max_age" as 0, cache bypassed
+Starting new HTTPS connection (1): pypi.org:443
+https://pypi.org:443 "GET /simple/djangorestframework/ HTTP/1.1" 304 0
+Fetched page https://pypi.org/simple/djangorestframework/ as application/vnd.pypi.simple.v1+json
+  Found link https://files.pythonhosted.org/packages/23/51/0ead651767dc292642dde0d64065fb8aa85151765c69a64a3b7db9b02ec4/djangorestframework-0.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.1
+  Found link https://files.pythonhosted.org/packages/31/91/4322715fac77dbff988471f4b468bcdf11df10cf32f74bd47a3b67a2f6b5/djangorestframework-0.1.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.1.1
+  Found link https://files.pythonhosted.org/packages/ab/cb/535b4d824acdf750b76b855a4973596ed02c4ea9577a42a9104a791605a8/djangorestframework-0.1.1.zip (from https://pypi.org/simple/djangorestframework/), version: 0.1.1
+  Found link https://files.pythonhosted.org/packages/73/96/2b51516e3ee91cafda45d9b94ddce2684064cba761556bf0d83ef59ccc0a/djangorestframework-0.2.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.2.0
+  Found link https://files.pythonhosted.org/packages/2d/40/b44b808077db75b2de2c40a8fa8d0c609c58dfee27b3792809e56e8537f1/djangorestframework-0.2.0.zip (from https://pypi.org/simple/djangorestframework/), version: 0.2.0
+  Found link https://files.pythonhosted.org/packages/1f/de/8509c7d5d964f69b319081835eeedad2ca16e6c0e9dee143102c895618fa/djangorestframework-0.2.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.2.1
+  Found link https://files.pythonhosted.org/packages/61/53/96afd56534ded9bfe21ff05b0fa21c56466bf3fd20aa1fc552fb8556b887/djangorestframework-0.2.1.zip (from https://pypi.org/simple/djangorestframework/), version: 0.2.1
+  Found link https://files.pythonhosted.org/packages/fe/da/95614c22283bb48894162645fc78977bfc990047c715aa79f58257a85578/djangorestframework-0.2.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.2.2
+  Found link https://files.pythonhosted.org/packages/ac/11/9ce775f276d667e20e17365e422869bceb1ad51146cf2e39959286bcbe59/djangorestframework-0.2.2.zip (from https://pypi.org/simple/djangorestframework/), version: 0.2.2
+  Found link https://files.pythonhosted.org/packages/31/e7/d637aac73a5b56461fe9f367a81f5a4090beba42ac071de41dbf31a53e8a/djangorestframework-0.2.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.2.3
+  Found link https://files.pythonhosted.org/packages/78/14/de3eba6c0212ce50b6f53b5598306fd1540ff3d7715e8c6e1b372b3e21c5/djangorestframework-0.2.3.zip (from https://pypi.org/simple/djangorestframework/), version: 0.2.3
+  Found link https://files.pythonhosted.org/packages/ae/8e/890fa2d1a6d5fc20e6e64c8e9ef3ef6ec37a60bb1f0a8963639559e489a2/djangorestframework-0.2.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.2.4
+  Found link https://files.pythonhosted.org/packages/dd/9e/338ec6b5d922fa89c1be228d8e3e990c030465c6710ef500c07666e0cec8/djangorestframework-0.2.4.zip (from https://pypi.org/simple/djangorestframework/), version: 0.2.4
+  Found link https://files.pythonhosted.org/packages/d9/61/1ad3411d6d86dd9955484d7099bac84c3a231446a7ff0eae3e3f4d55ff88/djangorestframework-0.3.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.3.0
+  Found link https://files.pythonhosted.org/packages/8e/b8/2436eaa8594706b7ec4bad5a1292772d73118a5f985e023b9e779b2a5e22/djangorestframework-0.3.0.zip (from https://pypi.org/simple/djangorestframework/), version: 0.3.0
+  Found link https://files.pythonhosted.org/packages/95/b4/16f1d3f265db0fa4fa74431ecf3fbb8554dfbdc028b36cafcebfbc9fc211/djangorestframework-0.3.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.3.1
+  Found link https://files.pythonhosted.org/packages/6b/5f/d7e2c5c2c511e7db662e91f1b7ad6c3b3a0c4f991f10749567c845503d89/djangorestframework-0.3.1.zip (from https://pypi.org/simple/djangorestframework/), version: 0.3.1
+  Found link https://files.pythonhosted.org/packages/ba/2d/319eba46694814430ffa3df882e027394943d3a7bd5f2362bbd730f1cccb/djangorestframework-0.3.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.3.2
+  Found link https://files.pythonhosted.org/packages/a6/99/0461c5721beca5c61817cf991830643195918efbb46616b1359521027a03/djangorestframework-0.3.2.zip (from https://pypi.org/simple/djangorestframework/), version: 0.3.2
+  Found link https://files.pythonhosted.org/packages/63/35/89bb5de1afad2a649d2eb691b9a311a8b499f244254683c970bb5b28a463/djangorestframework-0.3.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.3.3
+  Found link https://files.pythonhosted.org/packages/e2/c8/37dbeccfc0bd9bb2d70ee0cd3a2e71220a83b1d6486fa73558c8776fc6fa/djangorestframework-0.4.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 0.4.0
+  Found link https://files.pythonhosted.org/packages/1f/8b/70664d59a5674e64797857aa905554b48ae376bd06251cb06c8e932076aa/djangorestframework-2.0.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.0.0
+  Found link https://files.pythonhosted.org/packages/bd/1b/f39549a37778df4c70278a20955c0aa0773d3b30685dc75deb6663634fb3/djangorestframework-2.0.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.0.1
+  Found link https://files.pythonhosted.org/packages/8a/5b/bfb97a26f7311f73a2588a99c55cf89c9224f9c9452930e3a3bad975c463/djangorestframework-2.0.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.0.2
+  Found link https://files.pythonhosted.org/packages/5a/ba/8bcadba9e627ea759e4e7dd86b940531c454a1c64d9f1cb4cdca623f2ef4/djangorestframework-2.1.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.0
+  Found link https://files.pythonhosted.org/packages/67/f7/551aa74683c6b0b791213d4fa55a198fd9977eaeea5a99598e289572aee8/djangorestframework-2.1.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.1
+  Found link https://files.pythonhosted.org/packages/19/13/61cfe55b5ca6c6824560550169b09b2fadc885557ddc9907c47a14364311/djangorestframework-2.1.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.2
+  Found link https://files.pythonhosted.org/packages/d1/55/34e06997c72ca9e1f0f643f4400829f144a2e869fc20928df0c70a62de71/djangorestframework-2.1.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.3
+  Found link https://files.pythonhosted.org/packages/05/72/26386aa1e7e364aabe6ee58f13c1969aa37ea28b6a9119022fdfce167627/djangorestframework-2.1.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.4
+  Found link https://files.pythonhosted.org/packages/43/e9/254a2c5af2be39cf051fc12786d646e15386486df33386e676aca0db82a8/djangorestframework-2.1.5.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.5
+  Found link https://files.pythonhosted.org/packages/65/8f/84cdbae8b53ed7029ee27ad8f55b118052a4721e302cc81f83b64d09c575/djangorestframework-2.1.6.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.6
+  Found link https://files.pythonhosted.org/packages/c8/b6/bd2b53e5a5ec459923f43cc1bb7b7bd131d1a86eb24464baf09a2144acb0/djangorestframework-2.1.7.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.7
+  Found link https://files.pythonhosted.org/packages/83/2b/3f45deb4a387b1071e7b83f559cbdadbcadc40cdafe03389d5d8f5655ced/djangorestframework-2.1.8.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.8
+  Found link https://files.pythonhosted.org/packages/f2/18/d36a0ccf0a64793ee9adb2b896f6c32c8929f4c7a6eb5d9956d67f419c3c/djangorestframework-2.1.9.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.9
+  Found link https://files.pythonhosted.org/packages/54/4a/1ca01561fefc2456580197229ba63ae8292ec84574c1ec4952cf60a7e1cb/djangorestframework-2.1.10.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.10
+  Found link https://files.pythonhosted.org/packages/00/15/76f5b10242a475dc9928484a70bfc862c290b46943e422e5089b12d3d333/djangorestframework-2.1.11.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.11
+  Found link https://files.pythonhosted.org/packages/45/1d/aa5da3db97b5b1300a7384120aff05851a03b152b7b195122bfba83ddaad/djangorestframework-2.1.12.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.12
+  Found link https://files.pythonhosted.org/packages/f2/59/5021e5dc224bcf712889dc83640c4b3a4c558eceefdab3b3b0d4410b39db/djangorestframework-2.1.13.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.13
+  Found link https://files.pythonhosted.org/packages/27/44/edc16efb6ce55ff971cd4051fd72ca0cbec7fbd85cc9df10063cdc221942/djangorestframework-2.1.14.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.14
+  Found link https://files.pythonhosted.org/packages/f1/c6/b3f339cf66e864bed5f47d2d0de44977e7f8338a36ecb0d7d85a23d2c2f4/djangorestframework-2.1.15.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.15
+  Found link https://files.pythonhosted.org/packages/f0/1d/ea523ec2368eb741892556161b6b519676241ca544faecb78a9e8422d98f/djangorestframework-2.1.16.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.16
+  Found link https://files.pythonhosted.org/packages/97/be/3e4cc542c00244c3ba67dc3439d0e82a9444f47b213c15c3c3226a822494/djangorestframework-2.1.17.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.1.17
+  Found link https://files.pythonhosted.org/packages/c9/00/15fe11dac581616f73966b53ca80a5829b7b8a1e85ace39106a0ea2967a5/djangorestframework-2.2.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.2.0
+  Found link https://files.pythonhosted.org/packages/0b/6d/6827ca40cb62ec723d61735cc7e7959d614bf302e9e89f5e42d7a9739d11/djangorestframework-2.2.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.2.1
+  Found link https://files.pythonhosted.org/packages/7c/2b/215f6e9350bba6f2076d0d3e2c0bfb3d2442f04c8c2edda46fec2da81ec3/djangorestframework-2.2.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.2.2
+  Found link https://files.pythonhosted.org/packages/08/d5/0e9d52641dbfe691dd326fd2e082af701a0dfaa5743e5376c0893e14f20f/djangorestframework-2.2.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.2.3
+  Found link https://files.pythonhosted.org/packages/36/11/ca40ba3397674cbf69304538143ecb152337342ad127b170f54031963f41/djangorestframework-2.2.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.2.4
+  Found link https://files.pythonhosted.org/packages/6a/60/4a3149de25d1d4bf3ef6462a922fc7924f471f62620f54c71ca23db7d466/djangorestframework-2.2.5.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.2.5
+  Found link https://files.pythonhosted.org/packages/20/86/fc468870df329ac57b6be9bc2c12287aaf05e8b94ca8407533a4e15673a5/djangorestframework-2.2.6.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.2.6
+  Found link https://files.pythonhosted.org/packages/f9/0f/4ac00214c7509c8ad63120c54d347afed21e148c138f035cfe8a76d9e9b4/djangorestframework-2.2.7.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.2.7
+  Found link https://files.pythonhosted.org/packages/8d/af/34a8373df51bdba32c2158a2516bde30b5fece1263941e75844c3ed3a309/djangorestframework-2.3.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.0
+  Found link https://files.pythonhosted.org/packages/85/78/0b4318ca705b6dc9699fafd87b38b4f98b6ccf81e6597bc1b43cd771a872/djangorestframework-2.3.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.1
+  Found link https://files.pythonhosted.org/packages/50/b9/013e56d1e552af08a649507d206b63d8df66467d8e4df6a0b5692f9922f7/djangorestframework-2.3.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.2
+  Found link https://files.pythonhosted.org/packages/0d/30/e81c9f7cd0e28e396ce7bd397ea8842dcc7e6d60c6579f0b8ee519f341eb/djangorestframework-2.3.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.3
+  Found link https://files.pythonhosted.org/packages/df/e7/bdbfc9a5b5edb04f7d8077ddf46c5c35c5809caabd630637cdf72f5ce97c/djangorestframework-2.3.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.4
+  Found link https://files.pythonhosted.org/packages/b7/be/674d71daa548bb064c28cf25123611f56a7fa76006bcd375ec0d00236771/djangorestframework-2.3.5.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.5
+  Found link https://files.pythonhosted.org/packages/1f/87/2ae15949253fab465258077522df2aa4e42fa32d2736f90ace42052830bc/djangorestframework-2.3.6.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.6
+  Found link https://files.pythonhosted.org/packages/e9/f1/71fa9dcd15e2e7db02355de478512489ab9f6decf90e8f936a1817ca5140/djangorestframework-2.3.7.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.7
+  Found link https://files.pythonhosted.org/packages/0e/2f/047398340e63102f8d6622580c24a198ec078542eeb1959a52d6e07925c5/djangorestframework-2.3.8.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.8
+  Found link https://files.pythonhosted.org/packages/20/20/3cd28558f68f4257b7a931bc7f241134ede06eb6a61785e539b7eb016c3f/djangorestframework-2.3.9.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.9
+  Found link https://files.pythonhosted.org/packages/4d/cd/7037247600b459f480f8c919baeb477827bbbc800e3fc56b092da19fbfec/djangorestframework-2.3.10-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.3.10
+  Found link https://files.pythonhosted.org/packages/f0/21/a367bb8c3f3525709442730682cdba69438e9955549934cdcc057dfcb6fa/djangorestframework-2.3.10.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.10
+  Found link https://files.pythonhosted.org/packages/b7/cb/8a39764cb74b14dfa25ec3184877a4f828c8b56c4b46df578b24bdcc3490/djangorestframework-2.3.11-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.3.11
+  Found link https://files.pythonhosted.org/packages/82/42/1d2f88d9e87393878874bb788e68e900364ccfaff6b47bb4a8492f2de6db/djangorestframework-2.3.11.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.11
+  Found link https://files.pythonhosted.org/packages/9d/d6/629090af0961a7213c361ebea8d9d03903a542a520c34966d12f77afad1a/djangorestframework-2.3.12-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.3.12
+  Found link https://files.pythonhosted.org/packages/69/da/823581f7202e0d8490716b45fc7f4eca2a716f39d6cc84e484f6d5a64406/djangorestframework-2.3.12.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.12
+  Found link https://files.pythonhosted.org/packages/0c/51/83a9c214af67f610bc1be34e76b9108ea295d1eac935fc499ab23857eb08/djangorestframework-2.3.13-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.3.13
+  Found link https://files.pythonhosted.org/packages/01/bd/5497e5228a3b6d87ca540b103a0cd59a23059d149a3d61f6c3794681955b/djangorestframework-2.3.13.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.13
+  Found link https://files.pythonhosted.org/packages/68/48/df9db101e871fe066bf86169ed4b3771e74da0067cf739fa07d528655480/djangorestframework-2.3.14-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.3.14
+  Found link https://files.pythonhosted.org/packages/c5/02/621fc6fb5c00a7408be2af3a9aa966b327905a16bc5891c66fc1da74f6d1/djangorestframework-2.3.14.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.3.14
+  Found link https://files.pythonhosted.org/packages/e5/74/02927dccb28a0af5289f098b3d556dfed21d9d376e328ca1966c8a8c94d5/djangorestframework-2.4.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.4.0
+  Found link https://files.pythonhosted.org/packages/f3/fd/9b73904328977bcadc480229049d7eaf0908a583f235f4ff1872a17b0b74/djangorestframework-2.4.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.4.0
+  Found link https://files.pythonhosted.org/packages/c3/b2/dcf11aa7e0cc5c8f875c90cbd79f65186000f57f28f630d015281f8e65b8/djangorestframework-2.4.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.4.1
+  Found link https://files.pythonhosted.org/packages/9a/30/198ad12b9b79330f4cbdd7f6e368a31f7ac6c9ecc8ca67db164abfdc893b/djangorestframework-2.4.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.4.1
+  Found link https://files.pythonhosted.org/packages/12/9a/54ed34a2d8f9d17bed7f10ce75666ccba6d94d715d8a7897f9ddbb59b477/djangorestframework-2.4.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.4.2
+  Found link https://files.pythonhosted.org/packages/22/79/62b4a0260faf98c60db19ca27c9231b762d71024333fccb307397f711f80/djangorestframework-2.4.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.4.2
+  Found link https://files.pythonhosted.org/packages/0e/48/3121f4876a096b36f29ee4c403d22f3c491474dc7bbb1a7a202ef837b61a/djangorestframework-2.4.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.4.3
+  Found link https://files.pythonhosted.org/packages/15/e5/d1294e39fd4debe3662725462d972ac77f51a65a5e85d660a9233b5e17b9/djangorestframework-2.4.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.4.4
+  Found link https://files.pythonhosted.org/packages/60/f0/490344fefac035a7d762cdeaef46b7e09a037ec3da2bc4dab65eaf89405a/djangorestframework-2.4.5-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.4.5
+  Found link https://files.pythonhosted.org/packages/4b/57/171a563925af32be083aaa52129b4c35cd7afd41b17b4eef6f6c8c9e61b9/djangorestframework-2.4.5.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.4.5
+  Found link https://files.pythonhosted.org/packages/c6/ef/7f5ba31fc70a0b6208d457df342ce98c5e598c67363303880de81ccc3f31/djangorestframework-2.4.6-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.4.6
+  Found link https://files.pythonhosted.org/packages/a7/82/fbccd18ed0301235b0145915578dc4144b33db35d28f7f2e9e1c05d39baa/djangorestframework-2.4.6.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.4.6
+  Found link https://files.pythonhosted.org/packages/f9/fd/00c8b6764cac6cfc2c2ef1df53849cd597384da135fb0d5055354a2c1f38/djangorestframework-2.4.8-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 2.4.8
+  Found link https://files.pythonhosted.org/packages/71/e6/4ee6cf154c23f28e3302584eb302ffc3dbb51c27a2c9b1c503f21daa85ce/djangorestframework-2.4.8.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 2.4.8
+  Found link https://files.pythonhosted.org/packages/4a/59/aea8efcf664858027ba4d7af2ace3efeee49f7e6ea98479023cc213311c2/djangorestframework-3.0.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.0.0
+  Found link https://files.pythonhosted.org/packages/a8/88/e5bf8a64a9ffd3c36d2c1db795310d868c1e7849fb10ba1a5978d5ace719/djangorestframework-3.0.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.0.1
+  Found link https://files.pythonhosted.org/packages/1a/70/ff52cb10a6a00c6329d26b44a28646b1ab7b5f4ee2d93ad14cab70813f2d/djangorestframework-3.0.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.0.1
+  Found link https://files.pythonhosted.org/packages/03/55/e822b727e66d3ebbf4583d8444dd616ed6a2177ac9ad46d743ae044b8e1d/djangorestframework-3.0.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.0.2
+  Found link https://files.pythonhosted.org/packages/e9/c0/d2a5d621f7faaef41e1ef82e90cee7be7466238cd09ac9d7728a7662716d/djangorestframework-3.0.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.0.2
+  Found link https://files.pythonhosted.org/packages/d9/24/a057727825c2d9bd3109873de71ddf3ab53d930c0a798f660211afc90d0f/djangorestframework-3.0.3-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.0.3
+  Found link https://files.pythonhosted.org/packages/a8/fe/776df71516fc51c5ae7dc495de8acab484dde340bd8e933886d027766082/djangorestframework-3.0.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.0.3
+  Found link https://files.pythonhosted.org/packages/ba/1b/24752dbf44ea2142e8ad5c02f778cdb19fe90a006c3127c178bd6384e2bf/djangorestframework-3.0.4-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.0.4
+  Found link https://files.pythonhosted.org/packages/1c/23/a3cbfe3c31e085d19c5feb8247868a3548d64de7bf0a83cf33ec104dfc76/djangorestframework-3.0.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.0.4
+  Found link https://files.pythonhosted.org/packages/42/ed/54554b3ac4ed965ed3a1668d6b25cccca678a37931846994fbccf4d84948/djangorestframework-3.0.5-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.0.5
+  Found link https://files.pythonhosted.org/packages/c0/c6/53b00976f53b82e20109b08398f2215fff09274a88ff9226eb713c361510/djangorestframework-3.0.5.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.0.5
+  Found link https://files.pythonhosted.org/packages/8e/51/25366bf943235ea2552d5cf002d4fad962f0a542e8fd64e3b87361970127/djangorestframework-3.1.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.1.0
+  Found link https://files.pythonhosted.org/packages/2f/3d/5cfd022aa3b0be6ad5fd9f3598e7eca7a5932669d8d661f8887b80f87c68/djangorestframework-3.1.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.1.0
+  Found link https://files.pythonhosted.org/packages/53/0b/e394f1f2a71f5697b31dbbfed32451d46f9a1fec137698ebf5ec40839fd8/djangorestframework-3.1.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.1.1
+  Found link https://files.pythonhosted.org/packages/a3/0e/5cf5a3dd62d80cd4d742fbd24a31a2c594b584df0f00a631a9d1d1194647/djangorestframework-3.1.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.1.1
+  Found link https://files.pythonhosted.org/packages/36/2a/a68ac07dac021b07c0746c10ccbe21386875e4d8fb33aa527b85f1c15b3c/djangorestframework-3.1.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.1.2
+  Found link https://files.pythonhosted.org/packages/77/18/7ce715b08346269dcc482b3fe698b75cb5ca4d596246a3e3781be2bfae14/djangorestframework-3.1.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.1.2
+  Found link https://files.pythonhosted.org/packages/fc/86/2b56b4281f43a5111e34809c1266d384b27b13bee9f557f29c7c390617c3/djangorestframework-3.1.3-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.1.3
+  Found link https://files.pythonhosted.org/packages/42/fe/130e4f3b4671ea009a26ddb55409fee3b7352ba7fe557648561337b10997/djangorestframework-3.1.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.1.3
+  Found link https://files.pythonhosted.org/packages/b4/f7/61c662bbc90f7d74557eea09e592dd9cc3c764e735e084050b49d526ff5c/djangorestframework-3.2.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.2.0
+  Found link https://files.pythonhosted.org/packages/f8/9a/44cba39acdec2c6c22ddfe43fc5531544dca5664148d6a4af4848440b2fc/djangorestframework-3.2.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.2.0
+  Found link https://files.pythonhosted.org/packages/77/c5/aec810aee76c467317c58456ebe55387af6c0c370b209dd7c15c18a12c70/djangorestframework-3.2.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.2.1
+  Found link https://files.pythonhosted.org/packages/e8/e5/600881e5ec937ef429f3aee64c35cbec9c1751a35befe92e1154f022d454/djangorestframework-3.2.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.2.1
+  Found link https://files.pythonhosted.org/packages/e9/79/ddc02959a2eb56bdd6e9ad08a4c982284506ab2515f990bfb9358523cf9e/djangorestframework-3.2.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.2.2
+  Found link https://files.pythonhosted.org/packages/70/3f/3fa411eb9fa1bab63e9e72de826c3559c61baf4ad0bdae96bc2ad8c9aaea/djangorestframework-3.2.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.2.2
+  Found link https://files.pythonhosted.org/packages/34/24/7d7e7c93325fccd101e5b6bed62c01992b047763e608f8fdde842c6fc568/djangorestframework-3.2.3-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.2.3
+  Found link https://files.pythonhosted.org/packages/c2/ca/3478ed1b840e551c356583eca37e7edb26e055ca2cfb8074ce60addddd46/djangorestframework-3.2.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.2.3
+  Found link https://files.pythonhosted.org/packages/bd/d1/72a87c7342515d42bf1f9d9439e47a0af6fce628bcdc3617d1bd7e6ae400/djangorestframework-3.2.4-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.2.4
+  Found link https://files.pythonhosted.org/packages/6f/ee/768c17ff38703bb11e036b7a87cbc016d7b61652950243ecbbb4369355f8/djangorestframework-3.2.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.2.4
+  Found link https://files.pythonhosted.org/packages/92/02/d67475f763a13952a772770ea92376e187cd5bbab43df4c0281e2697e2a1/djangorestframework-3.2.5-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.2.5
+  Found link https://files.pythonhosted.org/packages/dd/a0/a16a8b58d67752dd2063115a812ce4cedf4b7607ab461aaab244fbdcafc0/djangorestframework-3.2.5.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.2.5
+  Found link https://files.pythonhosted.org/packages/80/fc/cdedac27a6b8d49c537e3e7dc40c34294556eec30546ddd2c39adae4b0d6/djangorestframework-3.3.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.3.0
+  Found link https://files.pythonhosted.org/packages/69/dc/b7f4556ca844f97314f861540e25e737426a157dafdde64f1df3e3cea68f/djangorestframework-3.3.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.3.0
+  Found link https://files.pythonhosted.org/packages/ca/d2/71ba2a7989ac032b2dfb1ad3147a225621bbfe66d143dc495da7a399b40b/djangorestframework-3.3.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.3.1
+  Found link https://files.pythonhosted.org/packages/b7/aa/876ac7b3c9cfcb3d5716eb9c7563cd8bd4f96c3cd06d484ae4f999a84feb/djangorestframework-3.3.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.3.1
+  Found link https://files.pythonhosted.org/packages/ba/d1/dc5ac1b62fbea195a19180a194248efd1cddf173041653faa325152cd9c2/djangorestframework-3.3.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.3.2
+  Found link https://files.pythonhosted.org/packages/86/4a/045637e5cd2c2f9f6b0aba27ac65ba2e25ad2daacdc7f39ef3d7ff206e47/djangorestframework-3.3.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.3.2
+  Found link https://files.pythonhosted.org/packages/45/ce/a626c4e178c7334fbd825612a8e72489ffca8e851a83a5941ab7923f35dd/djangorestframework-3.3.3-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.3.3
+  Found link https://files.pythonhosted.org/packages/23/9c/94812ea7a7bd95af5439ab95795c03b6757a0cad30e751320f80799c8038/djangorestframework-3.3.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.3.3
+  Found link https://files.pythonhosted.org/packages/7f/f6/1e6fc4d04526d3e260c4854b170a38238e313ab03f8541d65557f3b6ee27/djangorestframework-3.4.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.4.0
+  Found link https://files.pythonhosted.org/packages/8d/d4/e697b2d47efc8876c60fb3486dc6673ce86d746b92116028c3e91c208a22/djangorestframework-3.4.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.4.0
+  Found link https://files.pythonhosted.org/packages/4c/cc/ea4200c9bdcbbba855825789e509b69803a8f04e32d9c9d97e52d4da6e25/djangorestframework-3.4.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.4.1
+  Found link https://files.pythonhosted.org/packages/e3/89/2113de171015ad680a6f33a8547d3844f3445a8b6dc4461f46f5a1ca1615/djangorestframework-3.4.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.4.1
+  Found link https://files.pythonhosted.org/packages/ec/ea/891f5c3c1fc23fc9ae58c8e1bffc2a6c56664ee3fc552e4217b7bd36071a/djangorestframework-3.4.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.4.2
+  Found link https://files.pythonhosted.org/packages/d2/63/499090e65892dd1897df80abc58103fa58904fdc33178544a46390a7c895/djangorestframework-3.4.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.4.2
+  Found link https://files.pythonhosted.org/packages/3c/42/bff267c39d7fc06ac07a066f269fd10997bf03b4bc6a7cd3968f5bbf718b/djangorestframework-3.4.3-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.4.3
+  Found link https://files.pythonhosted.org/packages/51/af/4d4ef3a1c9b8306deb3cea6401217e251f44f1dfbaea2306c76a2f8b8f71/djangorestframework-3.4.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.4.3
+  Found link https://files.pythonhosted.org/packages/fc/33/c4aea0f3f1e9110ab5814ded2cd68651813028797f34ece855106010a225/djangorestframework-3.4.4-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.4.4
+  Found link https://files.pythonhosted.org/packages/2d/6c/08339e32d574c17261af544ba673b708101fde3358cb5233fce7d30c8aca/djangorestframework-3.4.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.4.4
+  Found link https://files.pythonhosted.org/packages/8f/49/bd06c61b3f6a2072d807c127f0f7971280f5d3b98443e3e56a34f4530ca1/djangorestframework-3.4.5-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.4.5
+  Found link https://files.pythonhosted.org/packages/11/f2/2adf5e93e94f21400bd03b049a140e8d3f47a32f0d0cfbd60b56c1891509/djangorestframework-3.4.5.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.4.5
+  Found link https://files.pythonhosted.org/packages/99/1a/9b1b566f5c839ea4445635996bb1a4f2fb01ec6d2af006f49979f731ec8b/djangorestframework-3.4.6-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.4.6
+  Found link https://files.pythonhosted.org/packages/18/f6/80444cfe71c3cfb4361b73a1e9d921cede3f9da92f96f98d0f8cd1490f73/djangorestframework-3.4.6.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.4.6
+  Found link https://files.pythonhosted.org/packages/43/24/fd4b0ef635eecc613f36afc70692bc9422290a108124385d086243ab0257/djangorestframework-3.4.7-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.4.7
+  Found link https://files.pythonhosted.org/packages/bf/fb/40a6bb1259e295cfe9379715f648a3243171ce45c8b349c979f2e57c4fbe/djangorestframework-3.4.7.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.4.7
+  Found link https://files.pythonhosted.org/packages/74/db/0ac03a38c60515fcfcb290e27a12ff0274db0441dbe1b57b554a26bd4450/djangorestframework-3.5.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.5.0
+  Found link https://files.pythonhosted.org/packages/e7/ba/7f467aefa992fe4477639fd129aadd2c6e5160b1abf3c86b68a2896deee8/djangorestframework-3.5.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.5.0
+  Found link https://files.pythonhosted.org/packages/b3/43/3c28442c2d8a23afc34fd8d4d2bbeeb47e69a3cf65f5d3b2abc0301b1e02/djangorestframework-3.5.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.5.1
+  Found link https://files.pythonhosted.org/packages/b3/48/6abf950169ab7cf260666771235fa094630e76718302b06c3b95eb27ea8c/djangorestframework-3.5.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.5.1
+  Found link https://files.pythonhosted.org/packages/27/95/f08835bd96127103c26807b6649cb2de425ab553bb8ef1b9c748ec5ddbd5/djangorestframework-3.5.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.5.2
+  Found link https://files.pythonhosted.org/packages/49/1d/e7bacdbbf8701420ed99ff4c66d0e7de184ff573f07b8039e182cfded7bf/djangorestframework-3.5.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.5.2
+  Found link https://files.pythonhosted.org/packages/04/9b/a6667caf6cea9851225b0b7ed158a822f2e9f2338d7222d957ac09c2c0d9/djangorestframework-3.5.3-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.5.3
+  Found link https://files.pythonhosted.org/packages/91/48/ac0abccf578b61d17267981786698525174412103adb1291d5768c11121e/djangorestframework-3.5.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.5.3
+  Found link https://files.pythonhosted.org/packages/9a/9e/368b8e0592296985ab5a76a366d020bafcd0688cd2fe4f0acb597e509cc3/djangorestframework-3.5.4-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.5.4
+  Found link https://files.pythonhosted.org/packages/e9/24/86dfe19fb82a40a3d7a4c50371a8bd85b9277d3506698bf332a6d41d08f6/djangorestframework-3.5.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.5.4
+  Found link https://files.pythonhosted.org/packages/cf/19/48d0b920ccae1820a80c286fd9dc571e0b3db37a41186e8bdf8220ae2f6a/djangorestframework-3.6.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.6.0
+  Found link https://files.pythonhosted.org/packages/f0/bf/86be0c26f93118ab69d6296a319a973c0600fd1af04cc75af6428f7abbe8/djangorestframework-3.6.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.6.0
+  Found link https://files.pythonhosted.org/packages/de/00/16687a7129c291bb01277cd12e6533ecd00bf288a66671c7e730344a8940/djangorestframework-3.6.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.6.1
+  Found link https://files.pythonhosted.org/packages/b5/2b/a65874b617f17d6400c3fbbf9f61ccdc77034db71d6d212323af36d8ffbf/djangorestframework-3.6.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.6.1
+  Found link https://files.pythonhosted.org/packages/d2/79/e68b85647c539a155c6f6a0738208eb5ed09c61adabfd6f2e6edde944529/djangorestframework-3.6.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.6.2
+  Found link https://files.pythonhosted.org/packages/9d/53/031f391557b2b3e620744fefb3b92406f27a95b42867665da2369d48cece/djangorestframework-3.6.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.6.2
+  Found link https://files.pythonhosted.org/packages/28/1a/6228d127f426b23360f1d62fde153da500c35cad1ba115ffc03fbb40ebe9/djangorestframework-3.6.3-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.6.3
+  Found link https://files.pythonhosted.org/packages/41/07/7425c7167e6870eabbea8e0aece0738a45bbe52d38fd455c6fe089783c8e/djangorestframework-3.6.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.6.3
+  Found link https://files.pythonhosted.org/packages/12/22/98d2ea3089384b88f1ed86fb2799d8c57b59ce430c3972ec0f18986cd449/djangorestframework-3.6.4-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.6.4
+  Found link https://files.pythonhosted.org/packages/c4/05/8106de162e94ad30fdd42b4f77dcb76c656fd3f51a9c01fdbbc307fd2447/djangorestframework-3.6.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.6.4
+  Found link https://files.pythonhosted.org/packages/73/7e/72023d5601ff2ca1fd3115d00aa87a05d2a5bc7fe0f6dce9f6f5c7d4ece0/djangorestframework-3.7.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.7.0
+  Found link https://files.pythonhosted.org/packages/51/e2/1a0b8df16a6bec3f3cd2df6eb807123247fb318fe025ae12a85fef635e26/djangorestframework-3.7.0.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.7.0
+  Found link https://files.pythonhosted.org/packages/87/cd/0b99f91bf91de39ba155a8262f77102c4d8049cdb6eb1334c8f95f19050a/djangorestframework-3.7.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.7.1
+  Found link https://files.pythonhosted.org/packages/d0/ab/8b991e7d3e26af7cf6327c84b341e60004fc56325d8a4d4019e1474f7456/djangorestframework-3.7.1.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.7.1
+  Found link https://files.pythonhosted.org/packages/16/b1/3e5f618641f917d77e60904ea6c01b3a58af80006144ba57e2c262c3296f/djangorestframework-3.7.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.7.2
+  Found link https://files.pythonhosted.org/packages/10/b1/e159362abde8c55926e16c4c6518ff522bd19b912d5854541a0e5b28e74e/djangorestframework-3.7.2.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.7.2
+  Found link https://files.pythonhosted.org/packages/f5/2c/3c3c81b8ecd60952c20ccd5fc1d19c0b22731c80c75649dd2e3fef361aaf/djangorestframework-3.7.3-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.7.3
+  Found link https://files.pythonhosted.org/packages/d5/e5/af122289560e14760cbb6d8dafb0a85e04d912944be3262d1a04984c4d42/djangorestframework-3.7.3.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.7.3
+  Found link https://files.pythonhosted.org/packages/df/b5/048e0d2d3749657594114896fe6016940233b9fd8e3e310f835dd5060b90/djangorestframework-3.7.4-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.7.4
+  Found link https://files.pythonhosted.org/packages/40/b7/8fa7af8c8b29807f4b379e8e3204c3b5c1bf828b715f5d2c77b508fffdcc/djangorestframework-3.7.4.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.7.4
+  Found link https://files.pythonhosted.org/packages/81/7a/3c3d687eea4119500f542624309b72b9f5015795661dd263f68554e8f6df/djangorestframework-3.7.5-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.7.5
+  Found link https://files.pythonhosted.org/packages/a4/16/9e92825164cccdcf621e4ab53c185c6957952b5c85f2b81f30819809c7f1/djangorestframework-3.7.5.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.7.5
+  Found link https://files.pythonhosted.org/packages/3f/79/e1013dd4337cb4bf19b521720faf6c92e494abce32b156e320e63ae84acb/djangorestframework-3.7.6-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.7.6
+  Found link https://files.pythonhosted.org/packages/93/25/fca03a74c8225f65faeeda3da31a4ac61c6d18bb4295f45df6d54166d14b/djangorestframework-3.7.6.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.7.6
+  Found link https://files.pythonhosted.org/packages/7c/0f/70957d583a9040c902b22dfab88323c1be61266eaddb1b3463a401004856/djangorestframework-3.7.7-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/), version: 3.7.7
+  Found link https://files.pythonhosted.org/packages/6b/e0/e63919a37d0df8994cf97df19bffd6137957120b30915e6d57aa80e5408e/djangorestframework-3.7.7.tar.gz (from https://pypi.org/simple/djangorestframework/), version: 3.7.7
+  Found link https://files.pythonhosted.org/packages/8b/5f/20900529b5849b446b47382b7095fba81383af6240e731ce6cd50f4e0a68/djangorestframework-3.8.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.8.0
+  Found link https://files.pythonhosted.org/packages/8c/93/da0837a71b26a9e60f450081b3d2a4ef90c1b463a5634e98a2019c170214/djangorestframework-3.8.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.8.0
+  Found link https://files.pythonhosted.org/packages/d9/ea/eb9855829e2c22b6c610c02302d2979f9c53b797e2064b3304eff3b57c0c/djangorestframework-3.8.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.8.1
+  Found link https://files.pythonhosted.org/packages/72/58/8a180c8605910dda3370a59a5372ab3f75f83fe3a326db32b91c18b4ecae/djangorestframework-3.8.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.8.1
+  Found link https://files.pythonhosted.org/packages/90/30/ad1148098ff0c375df2a30cc4494ed953cf7551fc1ecec30fc951c712d20/djangorestframework-3.8.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.8.2
+  Found link https://files.pythonhosted.org/packages/c4/c0/a0d5a5872fb97c9210fb932116b2bf11f7b159239b00d514f5357b9cf11f/djangorestframework-3.8.2.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.8.2
+  Found link https://files.pythonhosted.org/packages/99/0b/d37a5a96c5d301e23adcabcc2f3fa659fb34e6308590f95ebb50cdbe98a1/djangorestframework-3.9.0-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.0
+  Found link https://files.pythonhosted.org/packages/3f/78/0b8628bb2e3540177c6fad2fe05321b5b6416244a104d586f4f6b64c17dc/djangorestframework-3.9.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.0
+  Found link https://files.pythonhosted.org/packages/ef/13/0f394111124e0242bf3052c5578974e88e62e3715f0daf76b7c987fc6705/djangorestframework-3.9.1-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.1
+  Found link https://files.pythonhosted.org/packages/ce/52/67954a3c0ccf78d509278748511d2ee3c0079ef58824e7d090ee7828fdc0/djangorestframework-3.9.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.1
+  Found link https://files.pythonhosted.org/packages/cc/6d/5f225f18d7978d8753c1861368efc62470947003c7f9f9a5cc425fc0689b/djangorestframework-3.9.2-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.2
+  Found link https://files.pythonhosted.org/packages/37/4b/04d175966fa4fec44c743ff2f11c7f25eaa69d677dba954fd28f2f66f913/djangorestframework-3.9.2.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.2
+  Found link https://files.pythonhosted.org/packages/6d/38/59a6fb9ed495878bc395e6f2b715f2d6c92a5fda0a332108c9f9650a2baa/djangorestframework-3.9.3-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.3
+  Found link https://files.pythonhosted.org/packages/ca/41/2e9f978708d6ae56e3b35962232fc0a2665c6ac383088525e08fa7a2db78/djangorestframework-3.9.3.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.3
+  Found link https://files.pythonhosted.org/packages/1b/fe/fcebec2a98fbd1548da1c12ce8d7f634a02a9cce350833fa227a625ec624/djangorestframework-3.9.4-py2.py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.4
+  Found link https://files.pythonhosted.org/packages/ce/1d/877af49d161879bc26585696ca0cab6487c4cb7604263cf5f1c745f5141a/djangorestframework-3.9.4.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*), version: 3.9.4
+  Found link https://files.pythonhosted.org/packages/d8/ab/8e346b337bfbfa27b940a8103459fe33f1fa985e3202debd15a844522735/djangorestframework-3.10.0-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.10.0
+  Found link https://files.pythonhosted.org/packages/fa/77/4230fd280208771edef35139e8e1472420ad49039895b11a975a068d099c/djangorestframework-3.10.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.10.0
+  Found link https://files.pythonhosted.org/packages/54/11/a600772feee08f145b3d77ca9cd913d66f17963915aaf239d66ceacf4b7e/djangorestframework-3.10.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.10.1
+  Found link https://files.pythonhosted.org/packages/f1/71/04d1f8208018cdd1c4fabd86809efcde4f9e35ca17d27738a143603d7836/djangorestframework-3.10.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.10.1
+  Found link https://files.pythonhosted.org/packages/af/2a/055e65e1aa25cc2726d68d78b859a7b5955c673bc5e4646b205c21e05b25/djangorestframework-3.10.2-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.10.2
+  Found link https://files.pythonhosted.org/packages/cd/c1/dae52ea01111eb657f30941fe803f3fbd3c807b1fefcdc39e6d312d7f9fd/djangorestframework-3.10.2.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.10.2
+  Found link https://files.pythonhosted.org/packages/33/8e/87a4e0025e3c4736c1dc728905b1b06a94968ce08de15304417acb40e374/djangorestframework-3.10.3-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.10.3
+  Found link https://files.pythonhosted.org/packages/78/10/19a102294f405a1e72d24faebe9d7614b69b5f070bdb69dfd3408dce56f0/djangorestframework-3.10.3.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.10.3
+  Found link https://files.pythonhosted.org/packages/be/5b/9bbde4395a1074d528d6d9e0cc161d3b99bd9d0b2b558ca919ffaa2e0068/djangorestframework-3.11.0-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.11.0
+  Found link https://files.pythonhosted.org/packages/80/f6/f742b0352d4ade1934fcb2a12f6fd669922415bea3d5d2d6596dc47abe14/djangorestframework-3.11.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.11.0
+  Found link https://files.pythonhosted.org/packages/a2/cc/a8738854bda156f8145b9185488c1dae79ce17df5b563c42ee7dd0c6245a/djangorestframework-3.11.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.11.1
+  Found link https://files.pythonhosted.org/packages/a7/9d/5eea11456889eaaf20b6cdb47fefe12915e99448559356fc42d7e02297a8/djangorestframework-3.11.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.11.1
+  Found link https://files.pythonhosted.org/packages/83/7c/4cfacd5a93eab48c1714da0422d88b031dfb94f6795c2d5ef9a348f1f376/djangorestframework-3.11.2-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.11.2
+  Found link https://files.pythonhosted.org/packages/bf/14/34a733e1f32e3b57ee233c2e92d914bad8569f1f0a93cf1b4be179c223bd/djangorestframework-3.11.2.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.11.2
+  Found link https://files.pythonhosted.org/packages/92/26/c8efdc4e11633b194da9cff2b8e9bb8dd71547d4820fb22f4d36a50fcf24/djangorestframework-3.12.0-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.0
+  Found link https://files.pythonhosted.org/packages/70/f3/7a06909978799c8bd994ee50fec06b2a14c339890affd8d13110c97eea06/djangorestframework-3.12.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.0
+  Found link https://files.pythonhosted.org/packages/a7/97/a2a6e4a8d909caa71a2acefead18bba2101dba0668c8b8d913ae3c4ee329/djangorestframework-3.12.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.1
+  Found link https://files.pythonhosted.org/packages/88/d6/7b472b299b9f5da838d6b955a316af21af87b0b4fd8735d9fa8832f52924/djangorestframework-3.12.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.1
+  Found link https://files.pythonhosted.org/packages/8e/42/4cd19938181a912150e55835109b1933be26b776f3d4fb186491968dc41d/djangorestframework-3.12.2-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.2
+  Found link https://files.pythonhosted.org/packages/4f/39/d93aa554a05a7b4151459960247811aff03a7a14f926d7e34b4877cbb2ae/djangorestframework-3.12.2.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.2
+  Found link https://files.pythonhosted.org/packages/40/df/d55c23ace156c87bd842719ae1044151ad0c43f6fa46258ce40506de4954/djangorestframework-3.12.3-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.3
+  Found link https://files.pythonhosted.org/packages/f1/7b/003bac97d3c61c6a80af4605dde1387a4b992a856d44c86e811b7bbfc9d7/djangorestframework-3.12.3.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.3
+  Found link https://files.pythonhosted.org/packages/d7/fe/18d96db43d440654e01a5831accd02948d373c160082bef186d6dc926255/djangorestframework-3.12.4-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.4
+  Found link https://files.pythonhosted.org/packages/cb/2e/86d38af19dcacccb53feda081cb5f4d6954480bfca961bc4dee31501bc99/djangorestframework-3.12.4.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.5), version: 3.12.4
+  Found link https://files.pythonhosted.org/packages/23/62/79898a1fd01b0fd235e6eb2ef92dd08e0bc3ca45d89d2adcc94786b90c78/djangorestframework-3.13.0-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.13.0
+  Found link https://files.pythonhosted.org/packages/03/03/3164c22a5f58cd07682d6101d1517e3b060ab593f116a84aa7313947946a/djangorestframework-3.13.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.13.0
+  Found link https://files.pythonhosted.org/packages/c8/45/2588c7c5a01a7da6822c6ffbc9a731d498c318a803a29ae780ec635ea41d/djangorestframework-3.13.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.13.1
+  Found link https://files.pythonhosted.org/packages/7e/40/efa7f7b2448194b1065572f34d3e6cadb478c67af62f6893957376d8a9be/djangorestframework-3.13.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.13.1
+  Found link https://files.pythonhosted.org/packages/ff/4b/3b46c0914ba4b7546a758c35fdfa8e7f017fcbe7f23c878239e93623337a/djangorestframework-3.14.0-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.14.0
+  Found link https://files.pythonhosted.org/packages/8e/53/5b2a002c5ebafd60dff1e1945a7d63dee40155830997439a9ba324f0fd50/djangorestframework-3.14.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.14.0
+  Found link https://files.pythonhosted.org/packages/cd/a7/98dac249a69c68972a6ddb0d03bc2ad3dd6a74384c531a973bc56f488615/djangorestframework-3.15.0-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.15.0
+  Found link https://files.pythonhosted.org/packages/1e/23/f056692f05d97cbd652f0d5126a8a72abd2f80acf452b59cbdf20578d742/djangorestframework-3.15.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.15.0
+  Found link https://files.pythonhosted.org/packages/c0/7e/8c45ea7f85dd5d52ceddbacc6f56ecaca21ecbfc0e8c34c95618a14d5082/djangorestframework-3.15.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.15.1
+  Found link https://files.pythonhosted.org/packages/ec/60/cc2dd985400293fe7bf3fa1b9a5d61f5b44200c33f7d31952f2c9fd79e8a/djangorestframework-3.15.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.15.1
+  Found link https://files.pythonhosted.org/packages/7c/b6/fa99d8f05eff3a9310286ae84c4059b08c301ae4ab33ae32e46e8ef76491/djangorestframework-3.15.2-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.8), version: 3.15.2
+  Found link https://files.pythonhosted.org/packages/2c/ce/31482eb688bdb4e271027076199e1aa8d02507e530b6d272ab8b4481557c/djangorestframework-3.15.2.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.8), version: 3.15.2
+  Found link https://files.pythonhosted.org/packages/eb/3e/2448e93f4f87fc9a9f35e73e3c05669e0edd0c2526834686e949bb1fd303/djangorestframework-3.16.0-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9), version: 3.16.0
+  Found link https://files.pythonhosted.org/packages/7d/97/112c5a72e6917949b6d8a18ad6c6e72c46da4290c8f36ee5f1c1dcbc9901/djangorestframework-3.16.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9), version: 3.16.0
+  Found link https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9), version: 3.16.1
+  Found link https://files.pythonhosted.org/packages/8a/95/5376fe618646fde6899b3cdc85fd959716bb67542e273a76a80d9f326f27/djangorestframework-3.16.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9), version: 3.16.1
+Skipping link: not a file: https://pypi.org/simple/djangorestframework/
+Given no hashes to check 231 links for project 'djangorestframework': discarding no candidates
+Collecting djangorestframework
+  Obtaining dependency information for djangorestframework from https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl.metadata
+  Created temporary directory: C:\Users\user\AppData\Local\Temp\pip-unpack-i7vgnjqk
+  Looking up "https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl.metadata" in the cache
+  Current age based on date: 974500
+  Ignoring unknown cache-control directive: immutable
+  Freshness lifetime from max-age: 365000000
+  The response is "fresh", returning cached response
+  365000000 > 974500
+  Using cached djangorestframework-3.16.1-py3-none-any.whl.metadata (11 kB)
+  Created temporary directory: C:\Users\user\AppData\Local\Temp\pip-metadata-ufem62at
+Requirement already satisfied: django>=4.2 in c:\users\user\appdata\local\programs\python\python314\lib\site-packages (from djangorestframework) (5.2.8)
+Requirement already satisfied: asgiref>=3.8.1 in c:\users\user\appdata\local\programs\python\python314\lib\site-packages (from django>=4.2->djangorestframework) (3.11.0)
+Requirement already satisfied: sqlparse>=0.3.1 in c:\users\user\appdata\local\programs\python\python314\lib\site-packages (from django>=4.2->djangorestframework) (0.5.3)
+Requirement already satisfied: tzdata in c:\users\user\appdata\local\programs\python\python314\lib\site-packages (from django>=4.2->djangorestframework) (2025.2)
+Created temporary directory: C:\Users\user\AppData\Local\Temp\pip-unpack-tvtrqbng
+Looking up "https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl" in the cache
+Current age based on date: 974499
+Ignoring unknown cache-control directive: immutable
+Freshness lifetime from max-age: 365000000
+The response is "fresh", returning cached response
+365000000 > 974499
+Using cached djangorestframework-3.16.1-py3-none-any.whl (1.1 MB)
+Downloading link https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9) to C:\Users\user\AppData\Local\Temp\pip-unpack-tvtrqbng\djangorestframework-3.16.1-py3-none-any.whl
+Installing collected packages: djangorestframework
+
+Successfully installed djangorestframework-3.16.1
+Remote version of pip: 25.3
+Local version of pip:  25.3
+Was pip installed by pip? True
+Removed build tracker: 'C:\\Users\\user\\AppData\\Local\\Temp\\pip-build-tracker-waf4g38m'
+-python:>=3.6), version: 3.14.0
+2025-11-22T22:43:36,555   Found link https://files.pythonhosted.org/packages/8e/53/5b2a002c5ebafd60dff1e1945a7d63dee40155830997439a9ba324f0fd50/djangorestframework-3.14.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.14.0
+2025-11-22T22:43:36,556   Found link https://files.pythonhosted.org/packages/cd/a7/98dac249a69c68972a6ddb0d03bc2ad3dd6a74384c531a973bc56f488615/djangorestframework-3.15.0-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.15.0
+2025-11-22T22:43:36,557   Found link https://files.pythonhosted.org/packages/1e/23/f056692f05d97cbd652f0d5126a8a72abd2f80acf452b59cbdf20578d742/djangorestframework-3.15.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.15.0
+2025-11-22T22:43:36,557   Found link https://files.pythonhosted.org/packages/c0/7e/8c45ea7f85dd5d52ceddbacc6f56ecaca21ecbfc0e8c34c95618a14d5082/djangorestframework-3.15.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.15.1
+2025-11-22T22:43:36,558   Found link https://files.pythonhosted.org/packages/ec/60/cc2dd985400293fe7bf3fa1b9a5d61f5b44200c33f7d31952f2c9fd79e8a/djangorestframework-3.15.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.6), version: 3.15.1
+2025-11-22T22:43:36,558   Found link https://files.pythonhosted.org/packages/7c/b6/fa99d8f05eff3a9310286ae84c4059b08c301ae4ab33ae32e46e8ef76491/djangorestframework-3.15.2-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.8), version: 3.15.2
+2025-11-22T22:43:36,559   Found link https://files.pythonhosted.org/packages/2c/ce/31482eb688bdb4e271027076199e1aa8d02507e530b6d272ab8b4481557c/djangorestframework-3.15.2.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.8), version: 3.15.2
+2025-11-22T22:43:36,559   Found link https://files.pythonhosted.org/packages/eb/3e/2448e93f4f87fc9a9f35e73e3c05669e0edd0c2526834686e949bb1fd303/djangorestframework-3.16.0-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9), version: 3.16.0
+2025-11-22T22:43:36,560   Found link https://files.pythonhosted.org/packages/7d/97/112c5a72e6917949b6d8a18ad6c6e72c46da4290c8f36ee5f1c1dcbc9901/djangorestframework-3.16.0.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9), version: 3.16.0
+2025-11-22T22:43:36,560   Found link https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9), version: 3.16.1
+2025-11-22T22:43:36,560   Found link https://files.pythonhosted.org/packages/8a/95/5376fe618646fde6899b3cdc85fd959716bb67542e273a76a80d9f326f27/djangorestframework-3.16.1.tar.gz (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9), version: 3.16.1
+2025-11-22T22:43:36,561 Skipping link: not a file: https://pypi.org/simple/djangorestframework/
+2025-11-22T22:43:36,566 Given no hashes to check 231 links for project 'djangorestframework': discarding no candidates
+2025-11-22T22:43:36,580 Collecting djangorestframework
+2025-11-22T22:43:36,580   Obtaining dependency information for djangorestframework from https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl.metadata
+2025-11-22T22:43:36,582   Created temporary directory: C:\Users\user\AppData\Local\Temp\pip-unpack-i7vgnjqk
+2025-11-22T22:43:36,584   Looking up "https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl.metadata" in the cache
+2025-11-22T22:43:36,656   Current age based on date: 974500
+2025-11-22T22:43:36,656   Ignoring unknown cache-control directive: immutable
+2025-11-22T22:43:36,657   Freshness lifetime from max-age: 365000000
+2025-11-22T22:43:36,657   The response is "fresh", returning cached response
+2025-11-22T22:43:36,657   365000000 > 974500
+2025-11-22T22:43:36,658   Using cached djangorestframework-3.16.1-py3-none-any.whl.metadata (11 kB)
+2025-11-22T22:43:36,701   Created temporary directory: C:\Users\user\AppData\Local\Temp\pip-metadata-ufem62at
+2025-11-22T22:43:36,751 Requirement already satisfied: django>=4.2 in c:\users\user\appdata\local\programs\python\python314\lib\site-packages (from djangorestframework) (5.2.8)
+2025-11-22T22:43:36,753 Requirement already satisfied: asgiref>=3.8.1 in c:\users\user\appdata\local\programs\python\python314\lib\site-packages (from django>=4.2->djangorestframework) (3.11.0)
+2025-11-22T22:43:36,754 Requirement already satisfied: sqlparse>=0.3.1 in c:\users\user\appdata\local\programs\python\python314\lib\site-packages (from django>=4.2->djangorestframework) (0.5.3)
+2025-11-22T22:43:36,755 Requirement already satisfied: tzdata in c:\users\user\appdata\local\programs\python\python314\lib\site-packages (from django>=4.2->djangorestframework) (2025.2)
+2025-11-22T22:43:36,761 Created temporary directory: C:\Users\user\AppData\Local\Temp\pip-unpack-tvtrqbng
+2025-11-22T22:43:36,762 Looking up "https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl" in the cache
+2025-11-22T22:43:36,808 Current age based on date: 974499
+2025-11-22T22:43:36,809 Ignoring unknown cache-control directive: immutable
+2025-11-22T22:43:36,809 Freshness lifetime from max-age: 365000000
+2025-11-22T22:43:36,809 The response is "fresh", returning cached response
+2025-11-22T22:43:36,810 365000000 > 974499
+2025-11-22T22:43:36,811 Using cached djangorestframework-3.16.1-py3-none-any.whl (1.1 MB)
+2025-11-22T22:43:36,813 Downloading link https://files.pythonhosted.org/packages/b0/ce/bf8b9d3f415be4ac5588545b5fcdbbb841977db1c1d923f7568eeabe1689/djangorestframework-3.16.1-py3-none-any.whl (from https://pypi.org/simple/djangorestframework/) (requires-python:>=3.9) to C:\Users\user\AppData\Local\Temp\pip-unpack-tvtrqbng\djangorestframework-3.16.1-py3-none-any.whl
+2025-11-22T22:43:36,977 Installing collected packages: djangorestframework
+
+2025-11-22T22:43:39,112 Successfully installed djangorestframework-3.16.1
+2025-11-22T22:43:39,117 Remote version of pip: 25.3
+2025-11-22T22:43:39,117 Local version of pip:  25.3
+2025-11-22T22:43:39,122 Was pip installed by pip? True
+2025-11-22T22:43:39,123 Removed build tracker: 'C:\\Users\\user\\AppData\\Local\\Temp\\pip-build-tracker-waf4g38m'

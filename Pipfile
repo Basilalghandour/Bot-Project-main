@@ -1,0 +1,21 @@
+# Bot-Project/Pipfile
+
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+pymysql = "*"
+drf-nested-routers = "*"
+cryptography = "*"
+requests = "*"
+celery = "*"
+redis = "*"
+django-background-tasks = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.14"
