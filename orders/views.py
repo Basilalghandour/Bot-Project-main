@@ -1,6 +1,5 @@
 # in orders/views.py
 
-# All necessary imports are combined at the top of the file
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,11 +11,10 @@ import json
 from .tasks import send_delayed_whatsapp
 from .shipping_services import send_order_to_delivery_company
 from .district_matching import find_best_district_match
-from .models import Brand, Order, Customer, BostaCity, BostaDistrict # ensure BostaDistrict is imported
+from .models import Brand, Order, Customer, BostaCity, BostaDistrict
 from .adapters import adapt_incoming_order
 from .models import *
 from .serializers import *
-# --- IMPORT THE NEW TEXT MESSAGE FUNCTION ---
 from .services import send_whatsapp_text_message
 
 
@@ -46,40 +44,53 @@ class OrderViewSet(viewsets.ModelViewSet):
         adapted = adapt_incoming_order(request.data, brand=brand)
         customer_data = adapted.pop("customer", {})
 
-        # --- GOVERNORATE (CITY) MATCHING ---
-        governorate_name = customer_data.get("state", "")
+        # Raw inputs from Shopify/Store
+        raw_governorate = customer_data.get("state", "")
+        raw_district = customer_data.get("city", "") # 'city' from adapter is often the district
+
+        final_city_name = raw_governorate
+        final_district_name = raw_district
         bosta_city_link = None
-        try:
-            bosta_city_link = BostaCity.objects.get(name__iexact=governorate_name)
-            print(f"DEBUG: Automatically matched governorate '{governorate_name}' to Bosta City: {bosta_city_link.name}")
-        except BostaCity.DoesNotExist:
-            print(f"WARNING: Governorate '{governorate_name}' not found in Bosta cities.")
-            # If the main governorate/city is not found, we cannot proceed.
-            return Response(
-                {"error": f"Governorate '{governorate_name}' is not a valid city."},
-                status=status.HTTP_400_BAD_REQUEST
-            )
 
-        # --- DISTRICT MATCHING LOGIC ---
-        user_district_name = customer_data.get("city", "") # 'city' from adapter is the district
-        matched_district = find_best_district_match(user_district_name, bosta_city_link)
-
-        # --- FALLBACK LOGIC START ---
-        if not matched_district:
-            # If no specific match, try to find the default for this city
+        # --- CONDITIONAL VALIDATION ---
+        # Only run Bosta matching if the brand is NOT Aramex
+        if brand.delivery_company == 'aramex':
+            print(f"DEBUG: Brand '{brand.name}' uses Aramex. Skipping Bosta validation.")
+            # For Aramex, we accept the raw data as-is. 
+            # The 'AramexService' will handle the name correction (e.g. Bani Suif -> Beni Suef) later.
+            
+        else:
+            # --- BOSTA STRICT LOGIC ---
+            # 1. Match Governorate (City)
             try:
-                # Construct the default district name we agreed on (e.g., "Default - Cairo")
-                default_district_name = f"Default - {bosta_city_link.name}"
-                matched_district = BostaDistrict.objects.get(city=bosta_city_link, name=default_district_name)
-                print(f"DISTRICT_MATCH: FALLBACK. Using default district '{matched_district.name}' for city '{bosta_city_link.name}'.")
-            except BostaDistrict.DoesNotExist:
-                # This will happen if we forgot to add a default row in the DB for this city
-                error_message = f"Could not validate district '{user_district_name}' in '{governorate_name}' and no default district was found."
-                print(f"REJECTING ORDER: {error_message}")
-                return Response({"error": error_message}, status=status.HTTP_400_BAD_REQUEST)
-        # --- FALLBACK LOGIC END ---
+                bosta_city_link = BostaCity.objects.get(name__iexact=raw_governorate)
+                final_city_name = bosta_city_link.name # Use the clean DB name
+                print(f"DEBUG: Automatically matched governorate '{raw_governorate}' to Bosta City: {bosta_city_link.name}")
+            except BostaCity.DoesNotExist:
+                print(f"WARNING: Governorate '{raw_governorate}' not found in Bosta cities.")
+                return Response(
+                    {"error": f"Governorate '{raw_governorate}' is not a valid city for Bosta."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
-        # By this point, 'matched_district' is either the best match or the default.
+            # 2. Match District
+            matched_district = find_best_district_match(raw_district, bosta_city_link)
+
+            if matched_district:
+                final_district_name = matched_district.name
+            else:
+                # 3. Fallback Logic
+                try:
+                    default_district_name = f"Default - {bosta_city_link.name}"
+                    matched_district = BostaDistrict.objects.get(city=bosta_city_link, name=default_district_name)
+                    final_district_name = matched_district.name
+                    print(f"DISTRICT_MATCH: FALLBACK. Using default district '{matched_district.name}'.")
+                except BostaDistrict.DoesNotExist:
+                    error_message = f"Could not validate district '{raw_district}' in '{raw_governorate}' and no default found."
+                    print(f"REJECTING ORDER: {error_message}")
+                    return Response({"error": error_message}, status=status.HTTP_400_BAD_REQUEST)
+
+        # --- CREATE CUSTOMER ---
         customer = Customer.objects.create(
                  first_name=customer_data.get("first_name", ""),
                  last_name=customer_data.get("last_name", ""),
@@ -87,9 +98,12 @@ class OrderViewSet(viewsets.ModelViewSet):
                  phone=customer_data.get("phone", ""),
                  address=customer_data.get("address", ""),
                  apartment=customer_data.get("apartment", ""),
-                 city=governorate_name,  # Governorate (e.g., "Cairo")
-                 district=matched_district.name, # USE THE OFFICIAL, MATCHED, OR DEFAULT NAME
-                 bosta_city=bosta_city_link,
+                 
+                 # Use the resolved names (Raw for Aramex, Cleaned for Bosta)
+                 city=final_city_name,  
+                 district=final_district_name,
+                 
+                 bosta_city=bosta_city_link, # Can be None for Aramex
                  country=customer_data.get("country", ""),
                  postal_code=customer_data.get("postal_code", ""),
         )
@@ -99,12 +113,12 @@ class OrderViewSet(viewsets.ModelViewSet):
         order = serializer.save(brand=brand)
 
         if order:
-            # The background task is scheduled here
             send_delayed_whatsapp(order.id)
             print(f"Order {order.id} created. WhatsApp message scheduled.")
         
         out_serializer = self.get_serializer(order)
         return Response(out_serializer.data, status=status.HTTP_201_CREATED)    
+
 
 class CustomerViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
@@ -145,16 +159,9 @@ class DashboardViewSet(viewsets.ModelViewSet):
         return render(request, "dashboard.html", context)
 
 
-# in orders/views.py
-
-# in orders/views.py
-
-@csrf_exempt
-# in orders/views.py
-
 @csrf_exempt
 def whatsapp_webhook(request):
-    # GET request for verification (no changes here)
+    # GET request for verification
     if request.method == "GET":
         verify_token = settings.WHATSAPP_VERIFY_TOKEN
         mode = request.GET.get("hub.mode")
@@ -167,7 +174,7 @@ def whatsapp_webhook(request):
             print("WEBHOOK_VERIFICATION_FAILED")
             return HttpResponse("error, verification failed", status=403)
 
-    # POST request handler (updated with more prints)
+    # POST request handler
     if request.method == "POST":
         data = json.loads(request.body)
         print("--- WHATSAPP WEBHOOK RECEIVED ---")
@@ -196,15 +203,14 @@ def whatsapp_webhook(request):
                                 reply_message = "تم الغاء طلبك…❌\nلعمل طلب اخر يمكنك زيارة الموقع"
                             
                             order.save()
-                            # --- UPDATED PRINT STATEMENT AS REQUESTED ---
                             print(f"SUCCESS: Order {order_id} status updated to '{order.status}' in the database.")
 
-                            # If the order was just confirmed, send it to the delivery company
+                            # Trigger shipment if confirmed
                             if action == "confirm":
                                 print(f"DEBUG: Triggering shipment creation for confirmed order {order_id}...")
                                 send_order_to_delivery_company(order)
 
-                            # Send the follow-up message to the customer
+                            # Send follow-up message
                             if reply_message:
                                 send_whatsapp_text_message(order.customer.phone, reply_message)
                         

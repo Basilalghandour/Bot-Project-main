@@ -150,3 +150,20 @@ class AramexConfiguration(models.Model):
 
     def __str__(self):
         return f"Aramex Config for {self.brand.name}"
+    
+
+
+class AramexCity(models.Model):
+    name = models.CharField(max_length=100, unique=True, db_index=True)
+    # You will fill this with: Cairo, Giza, Alexandria, Dakahlia, etc.
+    
+    def __str__(self):
+        return self.name
+
+class AramexDistrict(models.Model):
+    city = models.ForeignKey(AramexCity, on_delete=models.CASCADE, related_name="districts")
+    name = models.CharField(max_length=100, db_index=True)
+    # You will fill this with: Maadi, Zamalek, Nasr City (Linked to Cairo)
+    
+    def __str__(self):
+        return f"{self.name} ({self.city.name})"    

@@ -1,8 +1,11 @@
 import requests
 import time
 import re
+import difflib
 from datetime import datetime, timedelta
 from django.conf import settings
+# Import your new models
+from orders.models import AramexCity, AramexDistrict
 
 class AramexService:
     """
@@ -26,6 +29,88 @@ class AramexService:
         self.account_country_code = config.account_country_code
         self.version = config.version
 
+    # --- SMART MATCHING LOGIC START ---
+    def _normalize_text(self, text):
+        """
+        Cleans and standardizes text (logic from district_matching.py).
+        """
+        if not isinstance(text, str): return ""
+        text = text.lower().strip()
+        text = text.replace('3', 'a').replace('7', 'h').replace('5', 'kh').replace('8', 'gh')
+        
+        if text.startswith("al-"): text = text[3:]
+        elif text.startswith("el-"): text = text[3:]
+        elif text.startswith("al"): text = text[2:]
+        elif text.startswith("el"): text = text[2:]
+        
+        text = re.sub(r'^(ال|أل)', '', text).strip()
+        text = re.sub(r'[^a-z0-9\s\u0600-\u06FF]', '', text, flags=re.UNICODE)
+        return re.sub(r'\s+', ' ', text).strip()
+
+    def _smart_match(self, input_name, candidates, threshold=0.70):
+        """
+        Intelligent matching using token comparison and scoring.
+        """
+        if not input_name or not candidates: return None
+        normalized_input = self._normalize_text(input_name)
+        input_tokens = set(normalized_input.split())
+        if not input_tokens: return None
+
+        best_match_obj = None
+        highest_score = 0.0
+
+        for obj in candidates:
+            db_name = obj.name
+            normalized_db_name = self._normalize_text(db_name)
+            if not normalized_db_name: continue
+            db_tokens = set(normalized_db_name.split())
+            if not db_tokens: continue
+
+            total_similarity = 0
+            for in_token in input_tokens:
+                best_match_for_token = difflib.get_close_matches(in_token, db_tokens, n=1, cutoff=0.4)
+                if best_match_for_token:
+                    similarity = difflib.SequenceMatcher(None, in_token, best_match_for_token[0]).ratio()
+                    total_similarity += similarity
+            
+            score = total_similarity / len(input_tokens)
+            if normalized_input and normalized_db_name and normalized_input[0] == normalized_db_name[0]:
+                score *= 1.15
+
+            if score > highest_score:
+                highest_score = score
+                best_match_obj = obj
+
+        if best_match_obj and highest_score >= threshold:
+            print(f"ARAMEX SMART MATCH: '{input_name}' -> '{best_match_obj.name}' (Score: {highest_score:.2f})")
+            return best_match_obj
+        return None
+
+    def _get_validated_city(self, user_city, user_district):
+        # 1. Match Governorate
+        all_cities = list(AramexCity.objects.all())
+        matched_city_obj = self._smart_match(user_city, all_cities, threshold=0.80)
+        
+        if not matched_city_obj:
+            print(f"ARAMEX WARNING: Could not match city '{user_city}'. Using raw.")
+            return user_city
+            
+        matched_city_name = matched_city_obj.name
+
+        # 2. Cairo Special Logic
+        if matched_city_name.lower() == "cairo":
+            print(f"ARAMEX: Detected Cairo. Attempting smart match for district '{user_district}'...")
+            cairo_districts = list(AramexDistrict.objects.filter(city=matched_city_obj))
+            matched_district_obj = self._smart_match(user_district, cairo_districts, threshold=0.65)
+            
+            if matched_district_obj:
+                return matched_district_obj.name 
+            else:
+                return "Heliopolis" # Fallback
+
+        return matched_city_name
+    # --- SMART MATCHING LOGIC END ---
+
     def create_shipment(self, order):
         """
         Creates a shipment in Aramex for the given Order object.
@@ -40,26 +125,28 @@ class AramexService:
                 raise ValueError(f"Brand '{order.brand.name}' has no Default Pickup Location.")
 
             shipper_line1 = pickup_loc.address_line
-            # Mapping: District -> Line 2 (Best practice for Egypt routing)
             shipper_line2 = pickup_loc.bosta_district.name if pickup_loc.bosta_district else ""
-            # Mapping: City -> City
             shipper_city = pickup_loc.bosta_city.name if pickup_loc.bosta_city else "Cairo"
             
             # Consignee (Customer) Data
             customer = order.customer
             if not customer:
                 raise ValueError(f"Order {order.id} has no customer attached.")
+            
+            # --- APPLY SMART MATCHING LOGIC HERE ---
+            final_api_city = self._get_validated_city(customer.city, customer.district)
+            # ---------------------------------------
 
             customer_phone = self._sanitize_phone(customer.phone)
             customer_name = f"{customer.first_name} {customer.last_name}"
             
-            # Dates (Now + 1 Hour to ensure immediate visibility in Handover)
+            # Dates (Now + 1 Hour)
             shipping_date = datetime.now() + timedelta(hours=1)
             shipping_date_str = shipping_date.strftime('%Y-%m-%dT%H:%M:%S')
             due_date = datetime.now() + timedelta(days=3)
             due_date_str = due_date.strftime('%Y-%m-%dT%H:%M:%S')
 
-            # Unique HAWB (Order ID + Timestamp)
+            # Unique HAWB
             foreign_hawb = f"{order.external_id or order.id}-{int(time.time())}"
 
             # Items Description
@@ -67,11 +154,11 @@ class AramexService:
             if not items_desc: items_desc = "General Items"
             if len(items_desc) > 200: items_desc = items_desc[:197] + "..."
 
-            # Calculate Number of Pieces
+            # Pieces
             number_of_pieces = sum(item.quantity for item in order.items.all())
             if number_of_pieces < 1: number_of_pieces = 1
 
-            # --- 2. PAYMENT & SERVICE LOGIC ---
+            # --- 2. PAYMENT & SERVICE LOGIC (Restored from your file) ---
             # Always E-Commerce (CDS)
             # Always Bill Shipper Account (P/ACCT)
             # Always COD (Value in CashOnDeliveryAmount)
@@ -147,8 +234,10 @@ class AramexService:
                                  <v1:Line1>{customer.address}</v1:Line1>
                                  <v1:Line2>{customer.district or ""}</v1:Line2>
                                  <v1:Line3>{customer.apartment or ""}</v1:Line3>
-                                 <v1:City>{customer.city}</v1:City>
-                                 <v1:StateOrProvinceCode>{customer.city}</v1:StateOrProvinceCode>
+                                 
+                                 <v1:City>{final_api_city}</v1:City>
+                                 <v1:StateOrProvinceCode>{final_api_city}</v1:StateOrProvinceCode>
+                                 
                                  <v1:PostCode>{customer.postal_code or "00000"}</v1:PostCode>
                                  <v1:CountryCode>EG</v1:CountryCode>
                               </v1:PartyAddress>
@@ -262,12 +351,10 @@ class AramexService:
             if response.status_code == 200:
                 if "<HasErrors>false</HasErrors>" in response.text:
                     try:
-                        # Extract ID
                         start = response.text.find("<ID>") + 4
                         end = response.text.find("</ID>")
                         tracking_id = response.text[start:end]
                         
-                        # Extract Label URL
                         label_url = None
                         if "LabelURL" in response.text:
                             l_start = response.text.find("<LabelURL>") + 10
@@ -291,9 +378,6 @@ class AramexService:
             return False, None, None
 
     def _sanitize_phone(self, phone):
-        """
-        Ensures the phone number is in a clean format for Aramex.
-        """
         if not phone: return ""
         phone = re.sub(r'[^0-9+]', '', str(phone))
         if len(phone) == 11 and phone.startswith("01"):
