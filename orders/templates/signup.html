@@ -1,0 +1,404 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up — Confirm It</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-dark: #121212;
+            --brand-card: #151515;
+            --brand-border: #3a3a3a;
+            --brand-green: #27ae60; 
+            --brand-green-bright: #4ade80; /* Brighter green for accents */
+            --brand-green-dim: rgba(39, 174, 96, 0.1);
+            --brand-text: #e0e0e0; 
+            --brand-text-grey: #a0a0a0;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--brand-dark);
+            color: var(--brand-text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Enhanced background with more green influence */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(39, 174, 96, 0.08), transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(39, 174, 96, 0.05), transparent 40%);
+            padding: 2rem 1rem;
+            position: relative; /* For absolute positioning of logo */
+        }
+
+        /* Logo positioned at top left to save vertical space */
+        .logo-link {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 10;
+        }
+
+        .brand-logo {
+            display: block;
+            height: 40px; /* Slightly smaller for corner position */
+            width: auto;
+            filter: drop-shadow(0 0 8px rgba(39, 174, 96, 0.3)); /* Green glow on logo */
+        }
+        
+        /* Logo inside the card header */
+        .header-logo {
+            display: block;
+            height: 48px;
+            margin: 0 auto 0.5rem auto; /* Centered with margin below */
+            filter: drop-shadow(0 0 8px rgba(39, 174, 96, 0.3));
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 900px; /* Much wider container for horizontal layout */
+            /* Removed scale/zoom to make it "more zoomed in" (100% scale) */
+            transform: none;
+        }
+
+        .auth-card {
+            background-color: var(--brand-card);
+            border: 1px solid var(--brand-border);
+            border-radius: 1.5rem; /* Softer, more modern rounded corners */
+            padding: 2.5rem 3rem; /* Adjusted padding */
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(39, 174, 96, 0.1); /* Subtle green border glow */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* REMOVED TOP GREEN ACCENT LINE as requested */
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Removed h1 style as it's replaced by logo */
+
+        .auth-header p {
+            color: var(--brand-text-grey);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* --- UPDATED FORM GRID FOR HORIZONTAL LAYOUT --- */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns */
+            column-gap: 2rem;
+            row-gap: 1.25rem; /* Reduced row gap */
+        }
+
+        /* Span 2 columns for full-width elements if needed */
+        .form-full-width {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--brand-text);
+            margin-left: 0.25rem;
+        }
+        
+        .form-label span {
+            color: var(--brand-green-bright);
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: rgba(255, 255, 255, 0.03); /* Slightly transparent background */
+            border: 1px solid var(--brand-border);
+            border-radius: 0.6rem;
+            color: white;
+            font-size: 0.9rem;
+            font-family: var(--font-main);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--brand-green);
+            background-color: rgba(39, 174, 96, 0.05); /* Green tint on focus */
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
+        }
+
+        /* Maintain background color on autofill */
+        .form-input:-webkit-autofill,
+        .form-input:-webkit-autofill:hover, 
+        .form-input:-webkit-autofill:focus, 
+        .form-input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.03) inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        .form-input::placeholder {
+            color: #555;
+            transition: opacity 0.2s ease; /* Add transition for fade effect */
+        }
+
+        /* Hide placeholder on focus */
+        .form-input:focus::placeholder {
+            opacity: 0;
+        }
+
+        /* Custom Select Styling */
+        .form-select {
+            appearance: none;
+            /* Green Chevron Icon */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2327ae60'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.1rem;
+            cursor: pointer;
+            /* Placeholder color logic (handled by JS class toggle for better support) */
+            color: #555; 
+        }
+        
+        .form-select.has-value {
+            color: white;
+        }
+        
+        /* Design dropped items (options) - Improved */
+        .form-select option {
+            background-color: #1a1a1a; /* Dark background for dropdown */
+            color: #e0e0e0;
+            padding: 12px; /* Increased padding for options */
+            font-size: 0.95rem;
+        }
+        
+        .form-select option:checked,
+        .form-select option:hover {
+            background-color: var(--brand-green) !important;
+            color: white !important;
+        }
+        
+        /* Just in case browser supports it, minimal scrollbar for select dropdown */
+        .form-select::-webkit-scrollbar {
+            width: 8px;
+        }
+        .form-select::-webkit-scrollbar-thumb {
+            background-color: var(--brand-border);
+            border-radius: 4px;
+        }
+
+        /* --- UPDATED BUTTON STYLE TO MATCH HERO --- */
+        .btn-submit {
+            width: 100%;
+            /* Copied from hero .btn-primary */
+            background-color: var(--brand-green);
+            color: var(--brand-dark); 
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+            border: 1px solid var(--brand-green); /* border-color from hero */
+            
+            border-radius: 0.5rem; /* From .btn in landing.html */
+            padding: 0.75rem 1.25rem; /* From .btn in landing.html */
+            font-size: 0.875rem; /* From .btn in landing.html */
+            font-weight: 600; /* From .btn in landing.html */
+            font-family: var(--font-main); /* From .btn in landing.html */
+            
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 1.5rem; 
+        }
+
+        .btn-submit:hover {
+            /* Copied from hero .btn-primary:hover */
+            background-color: transparent;
+            color: var(--brand-green);
+            border-color: var(--brand-green);
+            
+            transform: translateY(-2px); /* Keeping the lift effect */
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.35); /* Keeping the shadow enhancement */
+        }
+        
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .auth-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--brand-text-grey);
+            border-top: 1px solid var(--brand-border);
+            padding-top: 1.25rem;
+        }
+
+        .auth-link {
+            color: var(--brand-green-bright);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .auth-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        /* Checkbox styling */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+            grid-column: span 2; /* Ensure checkbox spans full width */
+        }
+        
+        .checkbox-input {
+            appearance: none;
+            width: 1.15rem;
+            height: 1.15rem;
+            border: 1px solid var(--brand-border);
+            border-radius: 0.25rem;
+            background-color: rgba(255,255,255,0.03);
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        
+        .checkbox-input:checked {
+            background-color: var(--brand-green);
+            border-color: var(--brand-green);
+        }
+        
+        .checkbox-input:checked::after {
+            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            width: 0.65rem;
+            height: 0.65rem;
+            display: block;
+        }
+        
+        .checkbox-label {
+            font-size: 0.85rem;
+            color: var(--brand-text-grey);
+            cursor: pointer;
+        }
+
+        /* Responsive adjustments for mobile */
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .logo-link { position: relative; top: auto; left: auto; margin-bottom: 1.5rem; align-self: center; } /* Re-center logo on mobile */
+            .auth-container { width: 100%; transform: none; }
+            .form-grid {
+                grid-template-columns: 1fr; /* Stack vertically on small screens */
+                column-gap: 0;
+            }
+            .form-full-width, .checkbox-group {
+                grid-column: span 1;
+            }
+            .auth-card {
+                padding: 1.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Removed logo from absolute position top-left -->
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <!-- Logo moved here -->
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'orders/imgs/logooo.png' %}" alt="Confirm It" class="header-logo">
+                </a>
+                <p>Start automating your logistics today.</p>
+            </div>
+
+            <form method="POST"> 
+                {% csrf_token %}
+                <div class="form-grid">
+                    <!-- Row 1: Brand Name & Website -->
+                    <div class="form-group">
+                        <label for="brand_name" class="form-label">Brand Name <span>*</span></label>
+                        <input type="text" id="brand_name" name="brand_name" class="form-input" placeholder="" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website" class="form-label">Brand Website</label>
+                        <input type="url" id="website" name="website" class="form-input" placeholder="https://yourbrand.com">
+                    </div>
+
+                    <!-- Row 2: Email & Phone -->
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address <span>*</span></label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number <span>*</span></label>
+                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="" required>
+                    </div>
+
+                    <!-- Row 3: Delivery Partner (Full Width or Split) -->
+                    <div class="form-group form-full-width">
+                        <label for="delivery_company" class="form-label">Primary Delivery Partner <span>*</span></label>
+                        <select id="delivery_company" name="delivery_company" class="form-select" required onchange="this.classList.add('has-value')">
+                            <!-- Hidden disabled option acts as placeholder but is not selectable in dropdown -->
+                            <option value="" disabled selected hidden>Select your courier...</option>
+                            <option value="bosta">Bosta</option>
+                            <option value="aramex">Aramex</option>
+                            <option value="khazenly">Khazenly</option>
+                            <option value="other">Other / Not Listed</option>
+                        </select>
+                    </div>
+
+                    <!-- Row 4: Password & Confirm Password -->
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password <span>*</span></label>
+                        <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required minlength="8">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password" class="form-label">Confirm Password <span>*</span></label>
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-input" placeholder="••••••••" required minlength="8">
+                    </div>
+                    
+                    <!-- Row 5: Terms Checkbox (Full Width) -->
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" class="checkbox-input" required>
+                        <label for="terms" class="checkbox-label">I agree to the <a href="#" class="auth-link" style="font-weight:400; text-decoration:underline;">Terms of Service</a> & Privacy Policy.</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="{% url 'login' %}" class="auth-link">Log in</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

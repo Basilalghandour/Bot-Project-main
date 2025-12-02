@@ -227,3 +227,22 @@ def whatsapp_webhook(request):
         return HttpResponse("success", status=200)
     
     return HttpResponse("Unsupported method", status=405)
+
+
+# In orders/views.py
+
+def landing_page(request):
+    """
+    Renders the main landing page for Confirm It.
+    """
+    return render(request, "landing.html")
+
+# In orders/views.py
+
+def login_page(request):
+    """Renders the simple Login page."""
+    return render(request, "login.html")
+
+def signup_page(request):
+    """Renders the simple Sign Up page."""
+    return render(request, "signup.html")
