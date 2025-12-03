@@ -20,6 +20,7 @@
             --brand-text: #e0e0e0; 
             --brand-text-grey: #a0a0a0;
             --font-main: 'Inter', sans-serif;
+            --error-red: #ff4d4f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,10 +40,7 @@
             position: relative;
         }
 
-        .auth-container {
-            width: 100%;
-            max-width: 900px;
-        }
+        .auth-container { width: 100%; max-width: 900px; }
 
         .auth-card {
             background-color: var(--brand-card);
@@ -53,310 +51,172 @@
             position: relative;
         }
 
-        .auth-header {
-            text-align: center;
-            margin-bottom: 2rem;
+        /* --- NEW BACK ARROW STYLE --- */
+        .back-nav-btn {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--brand-text-grey);
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            display: none; /* Hidden on Step 1 */
+            z-index: 10;
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+        .back-nav-btn:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .back-nav-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            display: block;
         }
 
-/* Updated Logo Style */
-        .auth-header a {
-            display: inline-block; /* Makes the link only as wide as the image */
-        }
-
+        .auth-header { text-align: center; margin-bottom: 2rem; }
+        .auth-header a { display: inline-block; }
         .header-logo {
             display: block;
-            height: 48px;       /* Keep the fixed height */
-            width: auto;        /* Force width to scale automatically */
-            max-width: 100%;    /* Prevent it from ever overflowing */
+            height: 48px; width: auto; max-width: 100%;
             margin: 0 auto 0.5rem auto;
             filter: drop-shadow(0 0 8px rgba(39, 174, 96, 0.3));
         }
-        .auth-header p {
-            color: var(--brand-text-grey);
-            font-size: 0.95rem;
-            margin-top: 0.5rem;
-        }
+        .auth-header p { color: var(--brand-text-grey); font-size: 0.95rem; margin-top: 0.5rem; }
 
-        /* --- FORM GRID --- */
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            column-gap: 2rem;
-            row-gap: 1.25rem;
+        /* Error Styles */
+        .field-error {
+            color: var(--error-red); font-size: 0.8rem; margin-top: 0.35rem; font-weight: 500;
+            display: none; 
+            animation: fadeIn 0.3s ease-in-out;
         }
-
-        .form-full-width {
-            grid-column: span 2;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            position: relative; /* Needed for custom dropdown positioning */
-        }
-
-        .form-label {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--brand-text);
-            margin-left: 0.25rem;
-        }
+        .field-error.visible { display: block; }
         
-        .form-label span {
-            color: var(--brand-green-bright);
-        }
+        .input-error { border-color: var(--error-red) !important; background-color: rgba(255, 77, 79, 0.05) !important; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; row-gap: 1.25rem; }
+        .form-full-width { grid-column: span 2; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; position: relative; }
+        .form-label { font-size: 0.85rem; font-weight: 500; color: var(--brand-text); margin-left: 0.25rem; }
+        .form-label span { color: var(--brand-green-bright); }
 
         .form-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
+            width: 100%; padding: 0.75rem 1rem;
             background-color: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--brand-border);
             border-radius: 0.6rem;
-            color: white;
-            font-size: 0.9rem;
-            font-family: var(--font-main);
-            outline: none;
-            transition: all 0.2s ease;
+            color: white; font-size: 0.9rem; font-family: var(--font-main);
+            outline: none; transition: all 0.2s ease;
         }
-
         .form-input:focus {
             border-color: var(--brand-green);
             background-color: rgba(39, 174, 96, 0.05);
             box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
         }
+        .form-input::placeholder { color: #555; transition: opacity 0.2s ease; }
+        .form-input:focus::placeholder { opacity: 0; }
 
-        .form-input::placeholder {
-            color: #555;
-            transition: opacity 0.2s ease;
-        }
-
-        .form-input:focus::placeholder {
-            opacity: 0;
-        }
-
-        /* --- CUSTOM DROPDOWN STYLES (NEW) --- */
-        .custom-select-wrapper {
-            position: relative;
-            user-select: none;
-            width: 100%;
-        }
-
-        /* The Trigger - Looks like an input */
+        /* Custom Dropdown */
+        .custom-select-wrapper { position: relative; width: 100%; }
         .custom-select-trigger {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0.75rem 1rem;
+            position: relative; display: flex; align-items: center; justify-content: space-between;
+            width: 100%; padding: 0.75rem 1rem;
             background-color: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--brand-border);
             border-radius: 0.6rem;
-            color: #555; /* Default placeholder color */
-            font-size: 0.9rem;
-            font-family: var(--font-main);
-            cursor: pointer;
-            transition: all 0.2s ease;
+            color: #555; font-size: 0.9rem; font-family: var(--font-main);
+            cursor: pointer; transition: all 0.2s ease;
         }
-
-        .custom-select-trigger.has-value {
-            color: white;
-        }
-
-        .custom-select-trigger:hover {
-            border-color: #555;
-        }
-
-        /* Focus state for trigger (when dropdown is open) */
+        .custom-select-trigger.has-value { color: white; }
         .custom-select.open .custom-select-trigger {
-            border-color: var(--brand-green);
-            background-color: rgba(39, 174, 96, 0.05);
+            border-color: var(--brand-green); background-color: rgba(39, 174, 96, 0.05);
             box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
-            border-bottom-left-radius: 0; /* Flatten bottom corners when open */
-            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0; border-bottom-right-radius: 0;
         }
-
-        /* The Arrow Icon */
         .arrow {
-            width: 1rem;
-            height: 1rem;
+            width: 1rem; height: 1rem;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2327ae60'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
+            background-repeat: no-repeat; background-position: center; background-size: contain;
             transition: transform 0.3s;
         }
-
-        .custom-select.open .arrow {
-            transform: rotate(180deg);
-        }
-
-        /* The Options Menu (Hidden by default) */
+        .custom-select.open .arrow { transform: rotate(180deg); }
         .custom-options {
-            position: absolute;
-            display: block;
-            top: 100%;
-            left: 0;
-            right: 0;
+            position: absolute; display: block; top: 100%; left: 0; right: 0;
             background-color: var(--brand-card);
-            border: 1px solid var(--brand-green); /* Green border for active menu */
-            border-top: none;
-            border-bottom-left-radius: 0.6rem;
-            border-bottom-right-radius: 0.6rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: translateY(-10px);
-            transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25);
+            border: 1px solid var(--brand-green); border-top: none;
+            border-bottom-left-radius: 0.6rem; border-bottom-right-radius: 0.6rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 100;
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transform: translateY(-10px); transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25);
             overflow: hidden;
         }
-
-        .custom-select.open .custom-options {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: all;
-            transform: translateY(0);
-        }
-
-        /* Individual Option */
+        .custom-select.open .custom-options { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
         .custom-option {
-            padding: 0.85rem 1rem;
-            font-size: 0.9rem;
-            color: #e0e0e0;
-            cursor: pointer;
-            transition: all 0.2s;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 0.85rem 1rem; font-size: 0.9rem; color: #e0e0e0;
+            cursor: pointer; transition: all 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .custom-option:last-child { border-bottom: none; }
+        .custom-option:hover { background-color: var(--brand-green); color: white; padding-left: 1.5rem; }
+        .custom-option.selected { background-color: rgba(39, 174, 96, 0.1); color: var(--brand-green-bright); }
+
+        /* Buttons & Footer */
+        .btn-submit, .btn-next {
+            width: 100%; border-radius: 0.5rem; padding: 0.75rem 1.25rem; font-size: 0.875rem; 
+            font-weight: 600; font-family: var(--font-main); cursor: pointer; transition: all 0.2s ease; margin-top: 1.5rem;
+            background-color: var(--brand-green); color: var(--brand-dark); box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); border: 1px solid var(--brand-green);
+        }
+        .btn-submit:hover, .btn-next:hover {
+            background-color: transparent; color: var(--brand-green); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(39, 174, 96, 0.35);
+        }
+        .btn-submit:disabled, .btn-next:disabled {
+            opacity: 0.7; cursor: not-allowed; transform: none;
         }
 
-        .custom-option:last-child {
-            border-bottom: none;
-        }
+        .steps-container { position: relative; }
+        .step { display: none; animation: fadeIn 0.4s ease-out; }
+        .step.active { display: block; }
 
-        .custom-option:hover {
-            background-color: var(--brand-green);
-            color: white;
-            padding-left: 1.5rem; /* Slight slide effect */
-        }
-
-        .custom-option.selected {
-            background-color: rgba(39, 174, 96, 0.1);
-            color: var(--brand-green-bright);
-        }
-
-        /* --- BUTTONS & FOOTER --- */
-        .btn-submit {
-            width: 100%;
-            background-color: var(--brand-green);
-            color: var(--brand-dark); 
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
-            border: 1px solid var(--brand-green);
-            border-radius: 0.5rem; 
-            padding: 0.75rem 1.25rem; 
-            font-size: 0.875rem; 
-            font-weight: 600; 
-            font-family: var(--font-main); 
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 1.5rem; 
-        }
-
-        .btn-submit:hover {
-            background-color: transparent;
-            color: var(--brand-green);
-            border-color: var(--brand-green);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.35);
-        }
+        .auth-footer { margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: var(--brand-text-grey); border-top: 1px solid var(--brand-border); padding-top: 1.25rem; }
+        .auth-link { color: var(--brand-green-bright); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .auth-link:hover { color: white; text-decoration: underline; }
         
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-
-        .auth-footer {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--brand-text-grey);
-            border-top: 1px solid var(--brand-border);
-            padding-top: 1.25rem;
-        }
-
-        .auth-link {
-            color: var(--brand-green-bright);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-
-        .auth-link:hover {
-            color: white;
-            text-decoration: underline;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 0.2rem;
-            grid-column: span 2; 
-        }
-        
+        .checkbox-group { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.2rem; grid-column: span 2; }
         .checkbox-input {
-            appearance: none;
-            width: 1.15rem;
-            height: 1.15rem;
-            border: 1px solid var(--brand-border);
-            border-radius: 0.25rem;
-            background-color: rgba(255,255,255,0.03);
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            flex-shrink: 0;
+            appearance: none; width: 1.15rem; height: 1.15rem; border: 1px solid var(--brand-border);
+            border-radius: 0.25rem; background-color: rgba(255,255,255,0.03); cursor: pointer;
+            position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
-        
-        .checkbox-input:checked {
-            background-color: var(--brand-green);
-            border-color: var(--brand-green);
-        }
-        
+        .checkbox-input:checked { background-color: var(--brand-green); border-color: var(--brand-green); }
         .checkbox-input:checked::after {
             content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-            width: 0.65rem;
-            height: 0.65rem;
-            display: block;
+            width: 0.65rem; height: 0.65rem; display: block;
         }
-        
-        .checkbox-label {
-            font-size: 0.85rem;
-            color: var(--brand-text-grey);
-            cursor: pointer;
-        }
+        .checkbox-label { font-size: 0.85rem; color: var(--brand-text-grey); cursor: pointer; }
 
         @media (max-width: 640px) {
             body { padding: 1rem; }
             .auth-container { width: 100%; }
-            .form-grid {
-                grid-template-columns: 1fr;
-                column-gap: 0;
-            }
-            .form-full-width, .checkbox-group {
-                grid-column: span 1;
-            }
+            .form-grid { grid-template-columns: 1fr; column-gap: 0; }
+            .form-full-width, .checkbox-group { grid-column: span 1; }
             .auth-card { padding: 1.5rem; }
         }
-
     </style>
 </head>
 <body>
 
-    <div class="auth-container">
+    <div class="auth-container" id="authContainer" data-has-step2-errors="{% if errors.brand_name or errors.delivery_company %}true{% else %}false{% endif %}">
         <div class="auth-card">
+            
+            <button type="button" class="back-nav-btn" id="backArrowBtn" onclick="prevStep()" aria-label="Go Back">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+            </button>
+
             <div class="auth-header">
                 <a href="{% url 'home' %}">
                     <img src="{% static 'orders/imgs/logooo.png' %}" alt="Confirm It" class="header-logo">
@@ -364,67 +224,106 @@
                 <p>Start automating your logistics today.</p>
             </div>
 
-            <form method="POST" id="signupForm"> 
+            {% if messages %}
+                {% for message in messages %}
+                <div style="color: #ff4d4f; background: rgba(255,77,79,0.1); padding: 10px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem; text-align: center;">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" id="signupForm" novalidate> 
                 {% csrf_token %}
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="brand_name" class="form-label">Brand Name <span>*</span></label>
-                        <input type="text" id="brand_name" name="brand_name" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="website" class="form-label">Brand Website</label>
-                        <input type="url" id="website" name="website" class="form-input" placeholder="https://yourbrand.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email Address <span>*</span></label>
-                        <input type="email" id="email" name="email" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone" class="form-label">Phone Number <span>*</span></label>
-                        <input type="tel" id="phone" name="phone" class="form-input" required>
-                    </div>
-
-                    <div class="form-group form-full-width">
-                        <label class="form-label">Primary Delivery Partner <span>*</span></label>
-                        
-                        <input type="hidden" name="delivery_company" id="delivery_company_hidden">
-
-                        <div class="custom-select-wrapper">
-                            <div class="custom-select" id="deliverySelect">
-                                <div class="custom-select-trigger">
-                                    <span class="selection-text">Select your courier...</span>
-                                    <div class="arrow"></div>
-                                </div>
-                                <div class="custom-options">
-                                    <div class="custom-option" data-value="bosta">Bosta</div>
-                                    <div class="custom-option" data-value="aramex">Aramex</div>
-                                    <div class="custom-option" data-value="khazenly">Khazenly</div>
-                                    <div class="custom-option" data-value="other">Other / Not Listed</div>
-                                </div>
+                
+                <div class="steps-container">
+                    
+                    <div id="step1" class="step active">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="first_name" class="form-label">First Name <span>*</span></label>
+                                <input type="text" id="first_name" name="first_name" class="form-input {% if errors.first_name %}input-error{% endif %}" value="{{ form_data.first_name|default:'' }}">
+                                <span class="field-error {% if errors.first_name %}visible{% endif %}" id="err-first_name">{% if errors.first_name %}{{ errors.first_name }}{% endif %}</span>
                             </div>
+
+                            <div class="form-group">
+                                <label for="last_name" class="form-label">Last Name <span>*</span></label>
+                                <input type="text" id="last_name" name="last_name" class="form-input {% if errors.last_name %}input-error{% endif %}" value="{{ form_data.last_name|default:'' }}">
+                                <span class="field-error {% if errors.last_name %}visible{% endif %}" id="err-last_name">{% if errors.last_name %}{{ errors.last_name }}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address <span>*</span></label>
+                                <input type="email" id="email" name="email" class="form-input {% if errors.email %}input-error{% endif %}" value="{{ form_data.email|default:'' }}">
+                                <span class="field-error {% if errors.email %}visible{% endif %}" id="err-email">{% if errors.email %}{{ errors.email }}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number <span>*</span></label>
+                                <input type="tel" id="phone" name="phone" class="form-input {% if errors.phone %}input-error{% endif %}" value="{{ form_data.phone|default:'' }}">
+                                <span class="field-error {% if errors.phone %}visible{% endif %}" id="err-phone">{% if errors.phone %}{{ errors.phone }}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="form-label">Password <span>*</span></label>
+                                <input type="password" id="password" name="password" class="form-input {% if errors.password %}input-error{% endif %}" placeholder="••••••••">
+                                <span class="field-error {% if errors.password %}visible{% endif %}" id="err-password">{% if errors.password %}{{ errors.password }}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirm_password" class="form-label">Confirm Password <span>*</span></label>
+                                <input type="password" id="confirm_password" name="confirm_password" class="form-input {% if errors.confirm_password %}input-error{% endif %}" placeholder="••••••••">
+                                <span class="field-error {% if errors.confirm_password %}visible{% endif %}" id="err-confirm_password">{% if errors.confirm_password %}{{ errors.confirm_password }}{% endif %}</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-next" onclick="nextStep()">Next: Business Info &rarr;</button>
+                    </div>
+
+                    <div id="step2" class="step">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="brand_name" class="form-label">Brand Name <span>*</span></label>
+                                <input type="text" id="brand_name" name="brand_name" class="form-input {% if errors.brand_name %}input-error{% endif %}" value="{{ form_data.brand_name|default:'' }}">
+                                <span class="field-error {% if errors.brand_name %}visible{% endif %}" id="err-brand_name">{% if errors.brand_name %}{{ errors.brand_name }}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="website" class="form-label">Brand Website</label>
+                                <input type="url" id="website" name="website" class="form-input" placeholder="https://yourbrand.com" value="{{ form_data.website|default:'' }}">
+                            </div>
+
+                            <div class="form-group form-full-width">
+                                <label class="form-label">Primary Delivery Partner <span>*</span></label>
+                                <input type="hidden" name="delivery_company" id="delivery_company_hidden" value="{{ form_data.delivery_company|default:'' }}">
+                                
+                                <div class="custom-select-wrapper">
+                                    <div class="custom-select {% if errors.delivery_company %}input-error{% endif %}" id="deliverySelect" {% if errors.delivery_company %}style="border-color: var(--error-red);"{% endif %}>
+                                        <div class="custom-select-trigger">
+                                            <span class="selection-text">Select your courier...</span>
+                                            <div class="arrow"></div>
+                                        </div>
+                                        <div class="custom-options">
+                                            <div class="custom-option" data-value="bosta">Bosta</div>
+                                            <div class="custom-option" data-value="aramex">Aramex</div>
+                                            <div class="custom-option" data-value="khazenly">Khazenly</div>
+                                            <div class="custom-option" data-value="other">Other / Not Listed</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="field-error {% if errors.delivery_company %}visible{% endif %}" id="err-delivery_company">{% if errors.delivery_company %}{{ errors.delivery_company }}{% endif %}</span>
+                            </div>
+
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="terms" name="terms" class="checkbox-input" required>
+                                <label for="terms" class="checkbox-label">I agree to the <a href="#" class="auth-link" style="font-weight:400; text-decoration:underline;">Terms of Service</a> & Privacy Policy.</label>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <button type="button" class="btn-submit" onclick="submitForm()" style="width: 100%; margin-top:0;">Create Account</button>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="password" class="form-label">Password <span>*</span></label>
-                        <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required minlength="8">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirm_password" class="form-label">Confirm Password <span>*</span></label>
-                        <input type="password" id="confirm_password" name="confirm_password" class="form-input" placeholder="••••••••" required minlength="8">
-                    </div>
-                    
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="terms" name="terms" class="checkbox-input" required>
-                        <label for="terms" class="checkbox-label">I agree to the <a href="#" class="auth-link" style="font-weight:400; text-decoration:underline;">Terms of Service</a> & Privacy Policy.</label>
-                    </div>
                 </div>
-
-                <button type="submit" class="btn-submit">Create Account</button>
             </form>
 
             <div class="auth-footer">
@@ -434,16 +333,198 @@
     </div>
 
     <script>
+        // --- HELPER TO SHOW/HIDE ERRORS ---
+        function showError(fieldId, message) {
+            const input = document.getElementById(fieldId);
+            const errorSpan = document.getElementById('err-' + fieldId);
+            
+            if (input) input.classList.add('input-error');
+            if (errorSpan) {
+                errorSpan.textContent = message;
+                errorSpan.classList.add('visible');
+            }
+        }
+
+        function clearError(fieldId) {
+            const input = document.getElementById(fieldId);
+            const errorSpan = document.getElementById('err-' + fieldId);
+            
+            if (input) input.classList.remove('input-error');
+            if (errorSpan) {
+                errorSpan.classList.remove('visible');
+                errorSpan.textContent = '';
+            }
+        }
+
+        // --- NAVIGATION LOGIC WITH AJAX CHECK ---
+        async function nextStep() {
+            let isValid = true;
+
+            // 1. Client-Side Checks
+            const fname = document.getElementById('first_name');
+            if (!fname.value.trim()) { showError('first_name', 'First Name is required.'); isValid = false; } else { clearError('first_name'); }
+
+            const lname = document.getElementById('last_name');
+            if (!lname.value.trim()) { showError('last_name', 'Last Name is required.'); isValid = false; } else { clearError('last_name'); }
+
+            const email = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.value.trim()) { showError('email', 'Email is required.'); isValid = false; }
+            else if (!emailRegex.test(email.value.trim())) { showError('email', 'Please enter a valid email.'); isValid = false; }
+            else { clearError('email'); }
+
+            const phone = document.getElementById('phone');
+            const phoneVal = phone.value.trim();
+            const phoneRegex = /^\+?[\d\s-]{10,15}$/;
+            
+            if (!phoneVal) { 
+                showError('phone', 'Phone number is required.'); 
+                isValid = false; 
+            } else if (!phoneRegex.test(phoneVal)) { 
+                showError('phone', 'Enter a valid phone number (10-15 digits).'); 
+                isValid = false; 
+            } else { 
+                clearError('phone'); 
+            }
+
+            const pass = document.getElementById('password');
+            if (!pass.value) { showError('password', 'Password is required.'); isValid = false; }
+            else if (pass.value.length < 8) { showError('password', 'Must be at least 8 characters.'); isValid = false; }
+            else { clearError('password'); }
+
+            const confirm = document.getElementById('confirm_password');
+            if (confirm.value !== pass.value) { showError('confirm_password', 'Passwords do not match.'); isValid = false; } else { clearError('confirm_password'); }
+
+            // STOP here if client-side validation fails
+            if (!isValid) return;
+
+            // 2. Server-Side Check (AJAX)
+            const nextBtn = document.querySelector('.btn-next');
+            const originalText = nextBtn.innerText;
+            nextBtn.innerText = "Checking...";
+            nextBtn.disabled = true;
+
+            try {
+                // Call API
+                const response = await fetch(`/validate-step1/?email=${encodeURIComponent(email.value.trim())}&phone=${encodeURIComponent(phone.value.trim())}`);
+                const data = await response.json();
+                
+                let hasServerError = false;
+                if (data.email) {
+                    showError('email', data.email);
+                    hasServerError = true;
+                }
+                if (data.phone) {
+                    showError('phone', data.phone);
+                    hasServerError = true;
+                }
+
+                if (hasServerError) {
+                    // Stay on Step 1
+                    nextBtn.innerText = originalText;
+                    nextBtn.disabled = false;
+                    return;
+                }
+
+                // SUCCESS: MOVE TO STEP 2
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+                
+                // SHOW BACK ARROW
+                document.getElementById('backArrowBtn').style.display = 'block';
+
+            } catch (error) {
+                console.error("Validation error:", error);
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+                document.getElementById('backArrowBtn').style.display = 'block';
+            } finally {
+                nextBtn.innerText = originalText;
+                nextBtn.disabled = false;
+            }
+        }
+
+        function prevStep() {
+            // Go back to Step 1
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step1').classList.add('active');
+            
+            // HIDE BACK ARROW
+            document.getElementById('backArrowBtn').style.display = 'none';
+        }
+
+        function submitForm() {
+            let isValid = true;
+
+            // 1. Brand Name
+            const brand = document.getElementById('brand_name');
+            if (!brand.value.trim()) {
+                showError('brand_name', 'Brand Name is required.');
+                isValid = false;
+            } else {
+                clearError('brand_name');
+            }
+
+            // 2. Delivery Company
+            const delivery = document.getElementById('delivery_company_hidden');
+            const selectBox = document.getElementById('deliverySelect');
+            
+            if (!delivery.value) {
+                showError('delivery_company', 'Please select a delivery partner.');
+                if(selectBox) selectBox.classList.add('input-error'); 
+                isValid = false;
+            } else {
+                clearError('delivery_company');
+                if(selectBox) selectBox.classList.remove('input-error');
+            }
+
+            // 3. Terms
+            const terms = document.getElementById('terms');
+            if (!terms.checked) {
+                isValid = false;
+                document.getElementById('signupForm').reportValidity();
+            }
+
+            if (isValid) {
+                document.getElementById('signupForm').submit();
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // --- DROPDOWN LOGIC ---
             const selectContainer = document.querySelector('.custom-select');
             const trigger = selectContainer.querySelector('.custom-select-trigger');
             const options = selectContainer.querySelectorAll('.custom-option');
             const hiddenInput = document.getElementById('delivery_company_hidden');
             const selectionText = selectContainer.querySelector('.selection-text');
 
+            // Repopulate dropdown if backend sent value back
+            if (hiddenInput.value) {
+                const savedValue = hiddenInput.value;
+                const matchedOption = Array.from(options).find(opt => opt.getAttribute('data-value') === savedValue);
+                if (matchedOption) {
+                    selectionText.textContent = matchedOption.textContent;
+                    trigger.classList.add('has-value');
+                    matchedOption.classList.add('selected');
+                }
+            }
+
+            // --- STEP SWITCHING ON LOAD (For backend validation errors) ---
+            const container = document.getElementById('authContainer');
+            if (container && container.dataset.hasStep2Errors === 'true') {
+                // If errors are in Step 2, go there immediately
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+                document.getElementById('backArrowBtn').style.display = 'block'; // Show arrow
+            } else {
+                // Default: Step 1 active, Arrow hidden
+                document.getElementById('step1').classList.add('active');
+                document.getElementById('step2').classList.remove('active');
+                document.getElementById('backArrowBtn').style.display = 'none';
+            }
+
             // Toggle dropdown open/close
             trigger.addEventListener('click', function(e) {
-                // Prevent event bubbling so the window click doesn't immediately close it
                 e.stopPropagation(); 
                 selectContainer.classList.toggle('open');
             });
@@ -451,45 +532,25 @@
             // Handle option selection
             options.forEach(option => {
                 option.addEventListener('click', function() {
-                    // Remove selected class from all options
                     options.forEach(opt => opt.classList.remove('selected'));
-                    
-                    // Add selected class to clicked option
                     this.classList.add('selected');
                     
-                    // Update trigger text and style
                     selectionText.textContent = this.textContent;
-                    trigger.classList.add('has-value'); // Turns text white
-                    
-                    // Update hidden input value
+                    trigger.classList.add('has-value'); 
                     hiddenInput.value = this.getAttribute('data-value');
                     
-                    // Close dropdown
                     selectContainer.classList.remove('open');
+                    
+                    // Clear error style
+                    selectContainer.classList.remove('input-error');
+                    clearError('delivery_company');
                 });
             });
 
-            // Close dropdown when clicking anywhere else outside
+            // Close dropdown when clicking outside
             window.addEventListener('click', function(e) {
                 if (!selectContainer.contains(e.target)) {
                     selectContainer.classList.remove('open');
-                }
-            });
-
-            // Form Validation (Check if dropdown is empty on submit)
-            const form = document.getElementById('signupForm');
-            form.addEventListener('submit', function(e) {
-                if (!hiddenInput.value) {
-                    e.preventDefault();
-                    // Visual feedback: Shake or highlight red
-                    trigger.style.borderColor = '#ff4d4f';
-                    trigger.style.boxShadow = '0 0 0 3px rgba(255, 77, 79, 0.2)';
-                    
-                    // Reset style after 2 seconds
-                    setTimeout(() => {
-                        trigger.style.borderColor = '';
-                        trigger.style.boxShadow = '';
-                    }, 2000);
                 }
             });
         });

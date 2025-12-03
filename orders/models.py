@@ -1,5 +1,6 @@
 from django.db import models
 from decimal import Decimal
+from django.contrib.auth.models import User  # <--- Import User
 import uuid
 class PickupLocation(models.Model):
     brand = models.ForeignKey("Brand", on_delete=models.CASCADE, related_name="pickup_locations")
@@ -11,29 +12,42 @@ class PickupLocation(models.Model):
     bosta_district = models.ForeignKey("BostaDistrict", on_delete=models.SET_NULL, null=True, blank=True)
 
 
+from django.db import models
+from django.contrib.auth.models import User  # <--- Import User
+import uuid
+
+# ... (PickupLocation model stays the same)
+
 class Brand(models.Model):
+    # Link Brand to a User Account
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='brand', null=True, blank=True)
+    
     name = models.CharField(max_length=100)
     website = models.URLField(blank=True, null=True)
     contact_email = models.EmailField(blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True, null=True,)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
     webhook_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    
+    # Updated choices to match your HTML dropdown
+    DELIVERY_CHOICES = [
+        ('bosta', 'Bosta'),
+        ('aramex', 'Aramex'),
+        ('khazenly', 'Khazenly'),
+        ('other', 'Other / Not Listed'),
+    ]
+    
     delivery_company = models.CharField(
         max_length=50, 
-        choices=[
-            ('bosta', 'Bosta'),
-            ('aramex', 'Aramex')
-            ], 
+        choices=DELIVERY_CHOICES, 
         blank=True, 
         null=True
     )
     delivery_api_key = models.CharField(max_length=255, blank=True, null=True)
-    default_pickup_location = models.ForeignKey(PickupLocation, on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
-
+    default_pickup_location = models.ForeignKey('PickupLocation', on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
 
     def __str__(self):
         return self.name
-
 
 
 class Order(models.Model):

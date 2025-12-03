@@ -1,13 +1,14 @@
 # in orders/views.py
-
+import re # <--- Add this import at the very top of views.py
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 import json
+
 from .tasks import send_delayed_whatsapp
 from .shipping_services import send_order_to_delivery_company
 from .district_matching import find_best_district_match
@@ -16,6 +17,13 @@ from .adapters import adapt_incoming_order
 from .models import *
 from .serializers import *
 from .services import send_whatsapp_text_message
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from .models import Brand
+from django.contrib.auth.decorators import login_required
+
 
 
 class BrandViewSet(viewsets.ModelViewSet):
@@ -227,7 +235,36 @@ def whatsapp_webhook(request):
         return HttpResponse("success", status=200)
     
     return HttpResponse("Unsupported method", status=405)
+def validate_step1(request):
+    """
+    AJAX Endpoint to check duplicates.
+    """
+    if request.method == 'GET':
+        email = request.GET.get('email', '').strip()
+        phone = request.GET.get('phone', '').strip()
+        errors = {}
+        
+        # 1. Email Check
+        if email and User.objects.filter(username=email).exists():
+            errors['email'] = "An account with this email already exists."
+            
+        # 2. Phone Check (Smart Matching)
+        if phone:
+            # Clean input: remove spaces, dashes, etc.
+            clean_input = re.sub(r'\D', '', phone) 
+            
+            # Check against direct match first
+            if Brand.objects.filter(phone_number=phone).exists():
+                errors['phone'] = "This phone number is already registered."
+            else:
+                # Check for "contains" logic or other formats if needed
+                # For now, let's try finding it by the cleaned version if you store them cleaned
+                # Or check if any existing number *contains* this number
+                if Brand.objects.filter(phone_number__icontains=clean_input).exists():
+                     errors['phone'] = "This phone number is already registered."
 
+        return JsonResponse(errors)
+    return JsonResponse({}, status=400)
 
 # In orders/views.py
 
@@ -246,3 +283,165 @@ def login_page(request):
 def signup_page(request):
     """Renders the simple Sign Up page."""
     return render(request, "signup.html")
+
+
+def signup_page(request):
+    """Handles Brand Sign Up logic with Field-Specific Validations."""
+    if request.method == 'POST':
+        # 1. Get data
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+        email = request.POST.get('email', '').strip()
+        phone = request.POST.get('phone', '').strip()
+        password = request.POST.get('password', '')
+        confirm_password = request.POST.get('confirm_password', '')
+        
+        brand_name = request.POST.get('brand_name', '').strip()
+        website = request.POST.get('website', '').strip()
+        delivery_company = request.POST.get('delivery_company', '')
+
+        # Store data to repopulate form on error
+        form_data = {
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': email,
+            'phone': phone,
+            'brand_name': brand_name,
+            'website': website,
+            'delivery_company': delivery_company,
+        }
+        
+        errors = {}
+
+        # --- VALIDATIONS ---
+        
+        # Step 1 Validations
+        if not first_name:
+            errors['first_name'] = "First Name is required."
+        if not last_name:
+            errors['last_name'] = "Last Name is required."
+        if not email:
+            errors['email'] = "Email Address is required."
+        if not phone:
+            errors['phone'] = "Phone Number is required."
+        if not password:
+            errors['password'] = "Password is required."
+        
+        # Step 2 Validations
+        if not brand_name:
+            errors['brand_name'] = "Brand Name is required."
+        if not delivery_company:
+            errors['delivery_company'] = "Please select a delivery partner."
+
+        # Logic Checks
+        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if email and not re.match(email_regex, email):
+            errors['email'] = "Enter a valid email address."
+
+        if phone and not re.match(r'^\+?[\d\s-]{10,15}$', phone):
+            errors['phone'] = "Enter a valid phone number."
+
+        if password:
+            if len(password) < 8:
+                errors['password'] = "Must be at least 8 characters."
+            elif not any(char.isalpha() for char in password):
+                errors['password'] = "Must contain at least one letter."
+
+        if confirm_password != password:
+            errors['confirm_password'] = "Passwords do not match."
+        
+        if 'email' not in errors:
+            if User.objects.filter(username=email).exists():
+                errors['email'] = "An account with this email already exists."
+        if 'phone' not in errors:
+            if Brand.objects.filter(phone_number=phone).exists():
+                errors['phone'] = "This phone number is already registered."
+
+        # --- IF ERRORS EXIST ---
+        if errors:
+            return render(request, "signup.html", {'form_data': form_data, 'errors': errors})
+
+        # --- SUCCESS ---
+        try:
+            # Create User with First/Last Name
+            user = User.objects.create_user(
+                username=email, 
+                email=email, 
+                password=password,
+                first_name=first_name,
+                last_name=last_name
+            )
+            user.save()
+
+            # Create Brand
+            Brand.objects.create(
+                user=user,
+                name=brand_name,
+                website=website,
+                contact_email=email,
+                phone_number=phone,
+                delivery_company=delivery_company
+            )
+
+            login(request, user)
+            return redirect('home')
+
+        except Exception as e:
+            messages.error(request, f"System Error: {e}")
+            return render(request, "signup.html", {'form_data': form_data})
+
+    return render(request, "signup.html")
+
+
+def login_page(request):
+    """Handles Brand Login logic with Field Errors."""
+    if request.method == 'POST':
+        email = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '')
+        
+        errors = {}
+        
+        if not email:
+            errors['username'] = "Email is required."
+        if not password:
+            errors['password'] = "Password is required."
+            
+        if not errors:
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                # Attach invalid credentials error to the password field or a general error
+                errors['detail'] = "Invalid email or password."
+
+        return render(request, "login.html", {'username': email, 'errors': errors})
+    
+    return render(request, "login.html")
+
+
+def landing_page(request):
+    # If user is logged in, show them their dashboard
+    if request.user.is_authenticated:
+        # Try to get the brand associated with this user
+        try:
+            brand = request.user.brand
+            
+            # Fetch stats specific to this brand
+            orders = Order.objects.filter(brand=brand).order_by('-created_at')
+            metrics = {
+                'total_orders': orders.count(),
+                'confirmed': orders.filter(status='confirmed').count(),
+                'pending': orders.filter(status='pending').count(),
+                'cancelled': orders.filter(status='cancelled').count(),
+            }
+            
+            context = { "brand": brand, "orders": orders, "metrics": metrics }
+            return render(request, "dashboard.html", context)
+            
+        except Brand.DoesNotExist:
+            # User exists but has no brand (shouldn't happen with correct signup flow)
+            return HttpResponse("User has no Brand profile.", status=400)
+            
+    # If not logged in, show the Landing Page
+    return render(request, "landing.html")
