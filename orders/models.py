@@ -80,6 +80,7 @@ class OrderItem(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
     size = models.CharField(max_length=50, blank=True, null=True)
+    sku = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f"{self.product_name} (x{self.quantity})"
@@ -180,4 +181,42 @@ class AramexDistrict(models.Model):
     # You will fill this with: Maadi, Zamalek, Nasr City (Linked to Cairo)
     
     def __str__(self):
-        return f"{self.name} ({self.city.name})"    
+        return f"{self.name} ({self.city.name})"  
+
+
+
+class KhazenlyConfiguration(models.Model):
+    brand = models.OneToOneField(
+        Brand, 
+        on_delete=models.CASCADE, 
+        related_name='khazenly_configuration'
+    )
+    # Credentials from the Khazenly Dashboard
+    client_id = models.CharField(max_length=255, help_text="Consumer Key")
+    client_secret = models.CharField(max_length=255, help_text="Consumer Secret")
+    store_url = models.CharField(max_length=255, help_text="e.g. FASHONSTA.com")
+    
+    # Connection Tokens
+    access_token = models.TextField(blank=True, null=True)
+    refresh_token = models.TextField(blank=True, null=True, help_text="Paste the Refresh Token you got from the handshake here.")
+    token_expiry = models.DateTimeField(blank=True, null=True)
+    
+    # Environment Toggle
+    is_live = models.BooleanField(default=False, help_text="Checked = Production, Unchecked = Testing")
+
+    def __str__(self):
+        return f"Khazenly Config for {self.brand.name}"   
+
+
+# orders/models.py
+
+# ... existing imports ...
+
+class KhazenlyCity(models.Model):
+    name = models.CharField(max_length=100, unique=True, db_index=True, help_text="The exact city name required by Khazenly API (e.g., 'Cairo', 'Giza', 'Mahalla')")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Khazenly Cities"       

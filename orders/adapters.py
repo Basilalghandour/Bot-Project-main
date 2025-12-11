@@ -94,7 +94,7 @@ def adapt_shopify_order(data, brand=None):
     for li in data.get("line_items", []) or []:
         qty = li.get("quantity") or li.get("qty") or 1
         price = li.get("price") or li.get("price_per_unit") or li.get("total") or li.get("subtotal") or 0
-        
+        sku = li.get("sku")  # <--- Capture the SKU here
         size = li.get("variant_title")
 
         items.append({
@@ -102,6 +102,7 @@ def adapt_shopify_order(data, brand=None):
             "quantity": int(qty),
             "price": str(_to_decimal(price)),
             "size": size,
+            "sku": sku,  # <--- Include SKU in the adapted item
         })
     
     shipping_lines = data.get("shipping_lines", [])

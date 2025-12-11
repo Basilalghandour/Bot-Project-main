@@ -2,6 +2,7 @@ import requests
 import re
 import json
 from .models import Order, BostaCity, BostaDistrict, Product
+from .khazenly_service import KhazenlyService  # <--- Import the new service
 
 # Import the new Aramex Service
 from orders.aramex_service import AramexService
@@ -163,11 +164,32 @@ def send_order_to_delivery_company(order: Order):
             else:
                 print(f"FAILED (Aramex): Could not create shipment for Order {order.id}")
                 return False
+            
 
         except Exception as e:
             print(f"EXCEPTION (Aramex): Integration failed for Order {order.id}: {e}")
             return False
             
+    
+    elif company == 'khazenly':
+        try:
+            service = KhazenlyService(brand=order.brand)
+            success, tracking_number = service.create_order(order)
+            
+            if success:
+                order.tracking_number = tracking_number
+                order.save(update_fields=['tracking_number'])
+                print(f"SUCCESS (Khazenly): Order {order.id} created! Tracking: {tracking_number}")
+                return True
+            else:
+                print(f"FAILED (Khazenly): Could not create order {order.id}")
+                return False
+        except Exception as e:
+            print(f"EXCEPTION (Khazenly): {e}")
+            return False
+            
     else:
-        print(f"ERROR: Unknown delivery company '{company}' configured for brand '{order.brand.name}'.")
+        print(f"ERROR: Unknown delivery company {company}")
         return False
+    
+   

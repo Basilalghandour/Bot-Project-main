@@ -5,7 +5,7 @@ from decimal import Decimal
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
-        fields = ["product_name", "quantity", "price", "size"]
+        fields = ["product_name", "quantity", "price", "size", "sku"]
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True, write_only=True)
