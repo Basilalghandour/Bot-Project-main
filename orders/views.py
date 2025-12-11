@@ -62,8 +62,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 
         # --- CONDITIONAL VALIDATION ---
         # Only run Bosta matching if the brand is NOT Aramex
-        if brand.delivery_company == 'aramex':
-            print(f"DEBUG: Brand '{brand.name}' uses Aramex. Skipping Bosta validation.")
+        if brand.delivery_company in ['aramex', 'khazenly']:
+            print(f"DEBUG: Brand '{brand.name}' uses {brand.delivery_company}. Skipping Bosta validation.")
             # For Aramex, we accept the raw data as-is. 
             # The 'AramexService' will handle the name correction (e.g. Bani Suif -> Beni Suef) later.
             
