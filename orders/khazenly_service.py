@@ -10,8 +10,8 @@ class KhazenlyService:
     STAGING_AUTH_URL = "https://khazenly4--test.sandbox.my.site.com/selfservice/services/oauth2/token"
     STAGING_API_BASE = "https://khazenly4--test.sandbox.my.salesforce.com/services/apexrest/api"
     
-    PRODUCTION_AUTH_URL = "https://integrations.khazenly.com/services/oauth2/token"
-    PRODUCTION_API_BASE = "https://integrations.khazenly.com/services/apexrest/api"
+    PRODUCTION_AUTH_URL = "https://integrations.khazenly.com/selfservice/services/oauth2/token"
+    PRODUCTION_API_BASE = "https://integrations.khazenly.com/selfservice/services/apexrest/api"
 
     def __init__(self, brand):
         try:
