@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout — Confirm It</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* --- GLOBAL STYLES (MATCHING INDEX.HTML) --- */
+      :root {
+        --brand-dark: #121212;
+        --brand-card: #151515;
+        --brand-border: #3a3a3a;
+        --brand-green: #27ae60;
+        --brand-green-bright: #4ade80;
+        --brand-text: #e0e0e0;
+        --brand-text-grey: #a0a0a0;
+        --font-main: "Inter", sans-serif;
+        --font-nav: "Poppins", sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-main);
+        background-color: var(--brand-dark);
+        color: var(--brand-text);
+        overflow-x: hidden;
+        line-height: 1.5;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.2s ease;
+      }
+      ul,
+      li {
+        list-style: none;
+      }
+      .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* --- HEADER --- */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        width: 100%;
+        border-bottom: 1px solid var(--brand-border);
+        background-color: rgba(18, 18, 18, 0.8);
+        backdrop-filter: blur(16px);
+      }
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1rem 1.5rem;
+      }
+      .brand-logo {
+        width: 180px;
+        height: auto;
+      }
+      .back-link {
+        color: var(--brand-text-grey);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      .back-link:hover {
+        color: white;
+      }
+
+      /* --- ANIMATION --- */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- CHECKOUT LAYOUT --- */
+      .checkout-section {
+        padding: 4rem 0 6rem 0;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      .checkout-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      @media (min-width: 768px) {
+        .checkout-grid {
+          grid-template-columns: 1fr 1.2fr; /* Summary Left, Form Right */
+          align-items: start;
+        }
+      }
+
+      /* --- LEFT SIDE: ORDER SUMMARY --- */
+      .order-summary {
+        background-color: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: 1rem;
+        padding: 2rem;
+        position: sticky;
+        top: 6rem;
+      }
+
+      .summary-header {
+        border-bottom: 1px solid var(--brand-border);
+        padding-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .summary-header h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: white;
+      }
+      .summary-header p {
+        color: var(--brand-text-grey);
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+      }
+
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+      }
+      .summary-item.highlight {
+        color: white;
+        font-weight: 500;
+      }
+      .summary-item span:last-child {
+        color: white;
+      }
+
+      .promo-code-box {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .input-promo {
+        flex: 1;
+        background: var(--brand-dark);
+        border: 1px solid var(--brand-border);
+        border-radius: 0.375rem;
+        padding: 0.5rem 0.75rem;
+        color: white;
+        font-family: var(--font-main);
+        font-size: 0.875rem;
+      }
+      .input-promo:focus {
+        outline: 1px solid var(--brand-green);
+        border-color: var(--brand-green);
+      }
+
+      .btn-apply {
+        background: transparent;
+        border: 1px solid var(--brand-border);
+        color: var(--brand-text-grey);
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+      }
+      .btn-apply:hover {
+        border-color: var(--brand-text);
+        color: var(--brand-text);
+      }
+
+      .total-row {
+        border-top: 1px solid var(--brand-border);
+        padding-top: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .total-label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
+      }
+      .total-amount {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--brand-green-bright);
+      }
+      .trial-badge {
+        display: inline-block;
+        background: rgba(39, 174, 96, 0.15);
+        color: var(--brand-green-bright);
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 9999px;
+        margin-top: 0.5rem;
+        font-weight: 600;
+      }
+
+      /* --- RIGHT SIDE: FORM --- */
+      .checkout-form-container h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 2rem;
+      }
+
+      /* LOGIN LINK STYLING */
+      .login-notice {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: rgba(39, 174, 96, 0.1);
+        border: 1px solid rgba(39, 174, 96, 0.2);
+        color: var(--brand-text);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .login-notice a {
+        color: var(--brand-green-bright);
+        font-weight: 600;
+        text-decoration: underline;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+      .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--brand-text);
+        margin-bottom: 0.5rem;
+      }
+      .form-input {
+        width: 100%;
+        background-color: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: 0.5rem;
+        padding: 0.75rem 1rem;
+        color: white;
+        font-size: 1rem;
+        font-family: var(--font-main);
+        transition: border-color 0.2s ease;
+      }
+      .form-input:focus {
+        outline: none;
+        border-color: var(--brand-green);
+        box-shadow: 0 0 0 1px var(--brand-green);
+      }
+
+      .btn-pay {
+        width: 100%;
+        background-color: var(--brand-green);
+        color: var(--brand-dark);
+        font-weight: 700;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-top: 1rem;
+      }
+      .btn-pay:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      .secure-notice {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        font-size: 0.8rem;
+        color: var(--brand-text-grey);
+      }
+      .secure-notice svg {
+        width: 1rem;
+        height: 1rem;
+        fill: currentColor;
+      }
+
+      .payment-logos {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+        opacity: 0.5;
+      }
+      .payment-logos img {
+        height: 1.5rem;
+        width: auto;
+      }
+
+      /* --- FOOTER (MATCHING UPDATED INDEX.HTML) --- */
+      .footer {
+        border-top: 1px solid var(--brand-border);
+        padding: 4rem 0;
+        margin-top: auto;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2rem;
+      }
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .footer-col h3 {
+        font-weight: 600;
+        color: white;
+        margin-bottom: 1rem;
+      }
+      .footer-col ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .footer-col ul a,
+      .footer-col ul li {
+        font-size: 0.875rem;
+        color: var(--brand-text-grey);
+      }
+      .footer-col ul a:hover {
+        color: white;
+      }
+      .footer-col-1 p {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: var(--brand-text-grey) !important;
+      }
+      .footer-bottom {
+        margin-top: 4rem;
+        border-top: 1px solid var(--brand-border);
+        padding-top: 2rem;
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--brand-text-grey);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav-container">
+        <a href="index.html" class="nav-logo-link">
+          <img src="imgs/logooo.png" alt="Confirm It Logo" class="brand-logo" />
+        </a>
+        <div style="display: flex; gap: 1rem">
+          <a href="index.html" class="back-link">Back to Home</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <div class="checkout-section">
+        <div class="checkout-grid">
+          <div class="order-summary">
+            <div class="summary-header">
+              <h2>Order Summary</h2>
+              <p>You won't be charged today.</p>
+            </div>
+
+            <div class="summary-item highlight">
+              <span id="plan-name">Pro Plan (Monthly)</span>
+              <span id="plan-price">1,000 EGP</span>
+            </div>
+            <div class="summary-item">
+              <span>7-Day Free Trial</span>
+              <span id="trial-discount" style="color: var(--brand-green-bright)"
+                >-1,000 EGP</span
+              >
+            </div>
+            <div class="summary-item">
+              <span>Setup Fee</span>
+              <span>0 EGP</span>
+            </div>
+
+            <div class="promo-code-box">
+              <input type="text" class="input-promo" placeholder="Promo Code" />
+              <button class="btn-apply">Apply</button>
+            </div>
+
+            <div class="total-row">
+              <div>
+                <div class="total-label">Total Due Today</div>
+                <div class="trial-badge">7-Day Free Trial Active</div>
+              </div>
+              <div class="total-amount">0.00 EGP</div>
+            </div>
+
+            <p
+              style="
+                margin-top: 1.5rem;
+                font-size: 0.8rem;
+                color: var(--brand-text-grey);
+                line-height: 1.4;
+              "
+            >
+              After your 7-day trial ends, you will be charged
+              <strong id="plan-future-charge">1,000 EGP / month</strong>. Cancel
+              anytime before the trial ends to avoid charges.
+            </p>
+          </div>
+
+          <div class="checkout-form-container">
+            <h1>Create your account</h1>
+
+            <div class="login-notice">
+              <svg
+                style="width: 1.25rem; height: 1.25rem; flex-shrink: 0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span>Already have an account? <a href="#">Log in here</a></span>
+            </div>
+
+            <form id="checkoutForm">
+              <div class="form-group">
+                <label class="form-label">Brand Name</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="e.g. My Shoe Store"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="John Doe"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Work Email</label>
+                <input
+                  type="email"
+                  class="form-input"
+                  placeholder="name@company.com"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Phone Number (WhatsApp)</label>
+                <input
+                  type="tel"
+                  class="form-input"
+                  placeholder="01xxxxxxxxx"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Create Password</label>
+                <input
+                  type="password"
+                  class="form-input"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+
+              <button type="submit" class="btn-pay">Proceed to Payment</button>
+
+              <div class="secure-notice">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7c0-2.757-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 3v3H9V7c0-1.654 1.346-3 3-3zm0 10a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                  />
+                </svg>
+                <span>Payments processed securely by Paymob</span>
+              </div>
+
+              <div class="payment-logos">
+                <span style="font-weight: 700; color: #fff; font-size: 1.1rem"
+                  >paymob</span
+                >
+                <span style="font-weight: 600; color: #ccc">VISA</span>
+                <span style="font-weight: 600; color: #ccc">Mastercard</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col-1">
+            <a href="index.html" class="nav-logo-link">
+              <img
+                src="imgs/logooo.png"
+                alt="Confirm It Logo"
+                class="brand-logo"
+              />
+            </a>
+            <p>Automating e-commerce confirmations and logistics for MENA.</p>
+          </div>
+
+          <div class="footer-col">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#pricing">Pricing</a></li>
+              <li><a href="index.html#how-it-works">How it Works</a></li>
+              <li><a href="index.html#integrations">Integrations</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="refund.html">Refund Policy</a></li>
+              <li><a href="index.html#">About Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Company</h3>
+            <ul>
+              <li>New Cairo 5th settlement, south 90, 231</li>
+              <li>01090092111</li>
+              <li>info@confirmit.store</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Confirm It. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // --- DYNAMIC PLAN LOGIC START ---
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        let plan = params.get("plan");
+        let price = params.get("price");
+
+        // Default fallback if someone opens checkout directly
+        if (!plan) plan = "Pro";
+        if (!price) price = "1000";
+
+        // Capitalize first letter
+        plan = plan.charAt(0).toUpperCase() + plan.slice(1);
+
+        // Update DOM Elements
+        const planNameEl = document.getElementById("plan-name");
+        const planPriceEl = document.getElementById("plan-price");
+        const trialDiscountEl = document.getElementById("trial-discount");
+        const futureChargeEl = document.getElementById("plan-future-charge");
+
+        if (price === "0") {
+          // Special case for Free Plan
+          planNameEl.textContent = `${plan} Plan (Free)`;
+          planPriceEl.textContent = `0 EGP`;
+          trialDiscountEl.textContent = `-0 EGP`;
+          futureChargeEl.textContent = `0 EGP / month`;
+        } else {
+          // Paid Plans
+          planNameEl.textContent = `${plan} Plan (Monthly)`;
+          planPriceEl.textContent = `${Number(price).toLocaleString()} EGP`;
+          trialDiscountEl.textContent = `-${Number(
+            price
+          ).toLocaleString()} EGP`;
+          futureChargeEl.textContent = `${Number(
+            price
+          ).toLocaleString()} EGP / month`;
+        }
+      });
+      // --- DYNAMIC PLAN LOGIC END ---
+
+      // Simple Form Handler
+      document
+        .getElementById("checkoutForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const btn = this.querySelector(".btn-pay");
+          const originalText = btn.innerText;
+
+          // Validate (HTML5 does most of it, this is visual feedback)
+          btn.innerText = "Processing...";
+          btn.style.opacity = "0.7";
+
+          // Simulation of API call
+          setTimeout(() => {
+            alert(
+              "This is a demo. In the production version, this will redirect to Paymob's secure checkout page."
+            );
+            btn.innerText = originalText;
+            btn.style.opacity = "1";
+          }, 1000);
+        });
+
+      // Promo Code Handler
+      document
+        .querySelector(".btn-apply")
+        .addEventListener("click", function () {
+          const input = document.querySelector(".input-promo");
+          if (input.value.trim() !== "") {
+            alert("Promo code applied! (Demo only)");
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Service — Confirm It</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* --- GLOBAL VARIABLES (MATCHING INDEX.HTML) --- */
+      :root {
+        --brand-dark: #121212;
+        --brand-card: #151515;
+        --brand-border: #3a3a3a;
+        --brand-green: #27ae60;
+        --brand-green-bright: #4ade80;
+        --brand-text: #e0e0e0;
+        --brand-text-grey: #a0a0a0;
+        --font-main: "Inter", sans-serif;
+        --font-nav: "Poppins", sans-serif;
+      }
+
+      /* --- BASIC RESET & TYPOGRAPHY --- */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-main);
+        background-color: var(--brand-dark);
+        color: var(--brand-text);
+        overflow-x: hidden;
+        line-height: 1.5;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.2s ease;
+      }
+      ul,
+      li {
+        list-style: none;
+      }
+
+      /* --- LAYOUT UTILITIES --- */
+      .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* --- HEADER (MATCHING INDEX.HTML) --- */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        width: 100%;
+        border-bottom: 1px solid var(--brand-border);
+        background-color: rgba(18, 18, 18, 0.8);
+        backdrop-filter: blur(16px);
+      }
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1rem 1.5rem;
+      }
+      .brand-logo {
+        width: 180px;
+        height: auto;
+      }
+      .back-link {
+        color: var(--brand-text-grey);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      .back-link:hover {
+        color: white;
+      }
+
+      /* --- ANIMATION KEYFRAMES --- */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- LEGAL CONTENT STYLES --- */
+      .legal-content-wrapper {
+        padding: 4rem 0 6rem 0;
+        max-width: 800px;
+        margin: 0 auto;
+        /* APPLY ANIMATION HERE */
+        opacity: 0; /* Start hidden */
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      .legal-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+      .legal-date {
+        color: var(--brand-text-grey);
+        margin-bottom: 3rem;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--brand-border);
+        padding-bottom: 2rem;
+      }
+
+      .legal-block {
+        margin-bottom: 2.5rem;
+      }
+
+      .legal-block h2 {
+        font-size: 1.5rem;
+        color: white;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .legal-block p {
+        line-height: 1.7;
+        color: var(--brand-text-grey);
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+
+      .legal-block ul {
+        list-style: disc;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--brand-text-grey);
+      }
+
+      .legal-block li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+
+      /* --- FOOTER (MATCHING INDEX.HTML) --- */
+      .footer {
+        border-top: 1px solid var(--brand-border);
+        padding: 4rem 0;
+        margin-top: auto;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2rem;
+      }
+      /* Desktop Grid - 4 Columns */
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .footer-col h3 {
+        font-weight: 600;
+        color: white;
+        margin-bottom: 1rem;
+      }
+      .footer-col ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .footer-col ul a,
+      .footer-col ul li {
+        font-size: 0.875rem;
+        color: var(--brand-text-grey);
+      }
+      .footer-col ul a:hover {
+        color: white;
+      }
+
+      .footer-col-1 p {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: var(--brand-text-grey) !important;
+      }
+
+      .footer-bottom {
+        margin-top: 4rem;
+        border-top: 1px solid var(--brand-border);
+        padding-top: 2rem;
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--brand-text-grey);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav-container">
+        <a href="index.html" class="nav-logo-link">
+          <img src="imgs/logooo.png" alt="Confirm It Logo" class="brand-logo" />
+        </a>
+        <div style="display: flex; gap: 1rem">
+          <a href="index.html" class="back-link">Back to Home</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <div class="legal-content-wrapper">
+        <h1 class="legal-title">Terms of Service</h1>
+        <p class="legal-date">Last Updated: October 26, 2024</p>
+
+        <div class="legal-block">
+          <h2>1. Acceptance of Terms</h2>
+          <p>
+            By accessing or using the "Confirm It" platform ("Service"), you
+            agree to be bound by these Terms of Service ("Terms"). If you do not
+            agree to these Terms, you may not use the Service. These Terms
+            constitute a legally binding agreement between you ("User" or
+            "Merchant") and Confirm It ("Company", "we", "us").
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>2. Service Description</h2>
+          <p>
+            Confirm It is a middleware automation SaaS designed to facilitate
+            order confirmation between E-commerce platforms (e.g., Shopify,
+            WooCommerce) and Logistics Providers (e.g., Bosta, Aramex) via
+            WhatsApp. We act solely as a technology provider and are not
+            responsible for the physical delivery of goods or the manufacturing
+            of products.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>3. Account Registration & Security</h2>
+          <p>
+            To use our Service, you must register for an account. You agree to:
+          </p>
+          <ul>
+            <li>
+              Provide accurate, current, and complete information during
+              registration.
+            </li>
+            <li>Maintain the security of your password and account access.</li>
+            <li>
+              Notify us immediately of any unauthorized use of your account.
+            </li>
+          </ul>
+        </div>
+
+        <div class="legal-block">
+          <h2>4. Subscription & Billing</h2>
+          <p>Our Service is billed on a recurring monthly basis via Paymob.</p>
+          <ul>
+            <li>
+              <strong>Free Trial:</strong> We offer a 7-day free trial. You will
+              not be charged if you cancel before the trial period ends.
+            </li>
+            <li>
+              <strong>Billing Cycle:</strong> Subscription fees are charged in
+              advance on a monthly basis.
+            </li>
+            <li>
+              <strong>Non-Payment:</strong> Failure to pay subscription fees
+              will result in the immediate suspension of your account and
+              cessation of automated messages.
+            </li>
+          </ul>
+        </div>
+
+        <div class="legal-block">
+          <h2>5. Acceptable Use Policy</h2>
+          <p>You agree not to use the Service to:</p>
+          <ul>
+            <li>
+              Send spam, unsolicited messages, or content that violates
+              WhatsApp’s Commerce Policy.
+            </li>
+            <li>Harass, threaten, or defraud end customers.</li>
+            <li>Transmit viruses, malware, or harmful code.</li>
+          </ul>
+          <p>
+            Violation of this policy may result in immediate account termination
+            without refund.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>6. Limitation of Liability</h2>
+          <p>
+            To the maximum extent permitted by applicable law, Confirm It shall
+            not be liable for any indirect, incidental, special, consequential,
+            or punitive damages, including but not limited to loss of profits,
+            data, or goodwill, arising out of:
+          </p>
+          <ul>
+            <li>Your use or inability to use the Service.</li>
+            <li>
+              Errors or delays caused by third-party providers (e.g., WhatsApp
+              outages, Courier API failures).
+            </li>
+            <li>The conduct of any third party on the Service.</li>
+          </ul>
+        </div>
+
+        <div class="legal-block">
+          <h2>7. Governing Law</h2>
+          <p>
+            These Terms shall be governed by and construed in accordance with
+            the laws of the Arab Republic of Egypt. Any disputes arising under
+            these Terms shall be subject to the exclusive jurisdiction of the
+            courts located in Cairo, Egypt.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>8. Contact Information</h2>
+          <p>For legal inquiries, please contact us at:</p>
+          <ul>
+            <li><strong>Email:</strong> info@confirmit.store</li>
+            <li>
+              <strong>Address:</strong> New Cairo 5th settlement, south 90, 231,
+              Cairo, Egypt.
+            </li>
+            <li><strong>Phone:</strong> 01090092111</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col-1">
+            <a href="index.html" class="nav-logo-link">
+              <img
+                src="imgs/logooo.png"
+                alt="Confirm It Logo"
+                class="brand-logo"
+              />
+            </a>
+            <p>Automating e-commerce confirmations and logistics for MENA.</p>
+          </div>
+
+          <div class="footer-col">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#pricing">Pricing</a></li>
+              <li><a href="index.html#how-it-works">How it Works</a></li>
+              <li><a href="index.html#integrations">Integrations</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="refund.html">Refund Policy</a></li>
+              <li><a href="index.html#">About Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Company</h3>
+            <ul>
+              <li>New Cairo 5th settlement, south 90, 231</li>
+              <li>01090092111</li>
+              <li>info@confirmit.store</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Confirm It. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

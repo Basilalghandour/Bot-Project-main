@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — Confirm It</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* --- GLOBAL VARIABLES & TYPOGRAPHY --- */
+      :root {
+        --brand-dark: #121212;
+        --brand-card: #151515;
+        --brand-border: #3a3a3a;
+        --brand-green: #27ae60;
+        --brand-green-bright: #4ade80;
+        --brand-text: #e0e0e0;
+        --brand-text-grey: #a0a0a0;
+        --font-main: "Inter", sans-serif;
+        --font-nav: "Poppins", sans-serif;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-main);
+        background-color: var(--brand-dark);
+        color: var(--brand-text);
+        overflow-x: hidden;
+        line-height: 1.5;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.2s ease;
+      }
+      ul,
+      li {
+        list-style: none;
+      }
+      .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* --- HEADER --- */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        width: 100%;
+        border-bottom: 1px solid var(--brand-border);
+        background-color: rgba(18, 18, 18, 0.8);
+        backdrop-filter: blur(16px);
+      }
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1rem 1.5rem;
+      }
+      .brand-logo {
+        width: 180px;
+        height: auto;
+      }
+      .back-link {
+        color: var(--brand-text-grey);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      .back-link:hover {
+        color: white;
+      }
+
+      /* --- ANIMATION --- */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- CONTENT --- */
+      .legal-content-wrapper {
+        padding: 4rem 0 6rem 0;
+        max-width: 800px;
+        margin: 0 auto;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+      .legal-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+      .legal-date {
+        color: var(--brand-text-grey);
+        margin-bottom: 3rem;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--brand-border);
+        padding-bottom: 2rem;
+      }
+      .legal-block {
+        margin-bottom: 2.5rem;
+      }
+      .legal-block h2 {
+        font-size: 1.5rem;
+        color: white;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+      .legal-block p {
+        line-height: 1.7;
+        color: var(--brand-text-grey);
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+      .legal-block ul {
+        list-style: disc;
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--brand-text-grey);
+      }
+      .legal-block li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+
+      /* --- FOOTER --- */
+      .footer {
+        border-top: 1px solid var(--brand-border);
+        padding: 4rem 0;
+        margin-top: auto;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 2rem;
+      }
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .footer-col h3 {
+        font-weight: 600;
+        color: white;
+        margin-bottom: 1rem;
+      }
+      .footer-col ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .footer-col ul a,
+      .footer-col ul li {
+        font-size: 0.875rem;
+        color: var(--brand-text-grey);
+      }
+      .footer-col ul a:hover {
+        color: white;
+      }
+
+      .footer-col-1 p {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: var(--brand-text-grey) !important;
+      }
+
+      .footer-bottom {
+        margin-top: 4rem;
+        border-top: 1px solid var(--brand-border);
+        padding-top: 2rem;
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--brand-text-grey);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav-container">
+        <a href="index.html" class="nav-logo-link">
+          <img src="imgs/logooo.png" alt="Confirm It Logo" class="brand-logo" />
+        </a>
+        <div style="display: flex; gap: 1rem">
+          <a href="index.html" class="back-link">Back to Home</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <div class="legal-content-wrapper">
+        <h1 class="legal-title">Privacy Policy</h1>
+        <p class="legal-date">Last Updated: October 26, 2024</p>
+
+        <div class="legal-block">
+          <h2>1. Introduction</h2>
+          <p>
+            Confirm It ("we", "our", or "us") is committed to protecting your
+            privacy. This Privacy Policy explains how we collect, use,
+            disclosure, and safeguard your information when you visit our
+            website confirm-it.store or use our application.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>2. Data We Collect</h2>
+          <p>
+            We collect information necessary to provide our automated
+            confirmation services:
+          </p>
+          <ul>
+            <li>
+              <strong>Merchant Information:</strong> Name, email address, phone
+              number, and billing information (processed securely by Paymob).
+            </li>
+            <li>
+              <strong>End-Customer Data:</strong> We process data from your
+              e-commerce store (Shopify/WooCommerce) including customer names,
+              phone numbers, addresses, and order details.
+            </li>
+          </ul>
+        </div>
+
+        <div class="legal-block">
+          <h2>3. How We Use Your Data</h2>
+          <p>We use the collected data for the following purposes:</p>
+          <ul>
+            <li>To facilitate automated order confirmations via WhatsApp.</li>
+            <li>
+              To generate shipping labels and tracking numbers with courier
+              providers.
+            </li>
+            <li>To process subscription payments and manage your account.</li>
+            <li>
+              To improve our platform's performance and fix technical issues.
+            </li>
+          </ul>
+        </div>
+
+        <div class="legal-block">
+          <h2>4. Sharing of Data</h2>
+          <p>
+            We do not sell your data. We share data only with third-party
+            service providers necessary to fulfill our service functions:
+          </p>
+          <ul>
+            <li>
+              <strong>Messaging Providers:</strong> Meta (WhatsApp API) for
+              sending confirmation messages.
+            </li>
+            <li>
+              <strong>Logistics Providers:</strong> Bosta, Aramex, and Khazenly
+              for order creation and shipping.
+            </li>
+            <li>
+              <strong>Payment Processors:</strong> Paymob for secure billing and
+              subscription management.
+            </li>
+          </ul>
+        </div>
+
+        <div class="legal-block">
+          <h2>5. Data Security</h2>
+          <p>
+            We use administrative, technical, and physical security measures to
+            help protect your personal information. While we have taken
+            reasonable steps to secure the personal information you provide to
+            us, please be aware that despite our efforts, no security measures
+            are perfect or impenetrable, and no method of data transmission can
+            be guaranteed against any interception or other type of misuse.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>6. Your Rights</h2>
+          <p>
+            You have the right to access, correct, or delete your personal data
+            stored on our servers. To exercise these rights, please contact our
+            support team at info@confirmit.store.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col-1">
+            <a href="index.html" class="nav-logo-link">
+              <img
+                src="imgs/logooo.png"
+                alt="Confirm It Logo"
+                class="brand-logo"
+              />
+            </a>
+            <p>Automating e-commerce confirmations and logistics for MENA.</p>
+          </div>
+
+          <div class="footer-col">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#pricing">Pricing</a></li>
+              <li><a href="index.html#how-it-works">How it Works</a></li>
+              <li><a href="index.html#integrations">Integrations</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="refund.html">Refund Policy</a></li>
+              <li><a href="index.html#">About Us</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Company</h3>
+            <ul>
+              <li>New Cairo 5th settlement, south 90, 231</li>
+              <li>01090092111</li>
+              <li>info@confirmit.store</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Confirm It. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
