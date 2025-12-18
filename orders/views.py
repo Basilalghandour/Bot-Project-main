@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 import json
+from django.contrib.auth import update_session_auth_hash # <--- Add this
+from django.contrib.auth.decorators import login_required
 
 from .tasks import send_delayed_whatsapp
 from .shipping_services import send_order_to_delivery_company
@@ -67,7 +69,7 @@ class OrderViewSet(viewsets.ModelViewSet):
             # For Aramex, we accept the raw data as-is. 
             # The 'AramexService' will handle the name correction (e.g. Bani Suif -> Beni Suef) later.
             
-        else:
+        else:           
             # --- BOSTA STRICT LOGIC ---
             # 1. Match Governorate (City)
             try:
@@ -435,8 +437,11 @@ def landing_page(request):
                 'pending': orders.filter(status='pending').count(),
                 'cancelled': orders.filter(status='cancelled').count(),
             }
+            password_errors = request.session.pop('password_errors', {})
+            show_password_modal = request.session.pop('show_password_modal', False)
             
-            context = { "brand": brand, "orders": orders, "metrics": metrics }
+            context = { "brand": brand, "orders": orders, "metrics": metrics,"password_errors": password_errors,
+                       "show_password_modal": show_password_modal }
             return render(request, "dashboard.html", context)
             
         except Brand.DoesNotExist:
@@ -445,3 +450,95 @@ def landing_page(request):
             
     # If not logged in, show the Landing Page
     return render(request, "landing.html")
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST.get('current_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        user = request.user
+        errors = {}
+
+        # --- VALIDATION ---
+        if not user.check_password(current_password):
+            errors['current_password'] = "Incorrect current password."
+        
+        if new_password != confirm_password:
+            errors['confirm_password'] = "Passwords do not match."
+            
+        if len(new_password) < 8:
+            errors['new_password'] = "Password must be at least 8 characters."
+
+        # --- IF ERRORS EXIST ---
+        if errors:
+            # 1. SAVE ERRORS TO SESSION
+            request.session['password_errors'] = errors
+            request.session['show_password_modal'] = True
+            
+            # 2. REDIRECT BACK
+            # Note: Ensure this URL matches your dashboard's URL name or path
+            return redirect('/?tab=settings') 
+
+        # --- SUCCESS ---
+        user.set_password(new_password)
+        user.save()
+        update_session_auth_hash(request, user) # Critical: Prevents logging out
+        messages.success(request, "Password updated successfully!")
+        
+        return redirect('/?tab=settings')
+
+    return redirect('/')
+
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        user = request.user
+        brand = user.brand
+
+        # 1. Get Data
+        new_brand_name = request.POST.get('brand_name', '').strip()
+        new_website = request.POST.get('website', '').strip()
+        new_email = request.POST.get('email', '').strip()
+        new_delivery = request.POST.get('delivery_company', '').strip()
+
+        # 2. Validations
+        if not new_brand_name:
+            messages.error(request, "Brand Name cannot be empty.")
+            return redirect('/?tab=settings')
+        
+        if not new_email:
+            messages.error(request, "Email cannot be empty.")
+            return redirect('/?tab=settings')
+
+        # Check for duplicates (exclude current user)
+        if new_email != user.email:
+            if User.objects.filter(email=new_email).exclude(pk=user.pk).exists():
+                messages.error(request, "This email address is already in use.")
+                return redirect('/?tab=settings')
+
+        # 3. Update User (Auth)
+        if new_email != user.email:
+            user.email = new_email
+            user.username = new_email 
+            user.save()
+
+        # 4. Update Brand Information
+        brand.name = new_brand_name
+        brand.website = new_website
+        
+        # --- NEW: SYNC CONTACT EMAIL ---
+        brand.contact_email = new_email 
+        
+        if new_delivery: 
+            brand.delivery_company = new_delivery
+        
+        brand.save()
+
+        messages.success(request, "Profile information updated successfully!")
+        return redirect('/?tab=settings')
+
+    return redirect('/')

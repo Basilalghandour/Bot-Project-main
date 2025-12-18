@@ -17,4 +17,7 @@ customer_router = routers.NestedDefaultRouter(router, 'customers', lookup='custo
 customer_router.register('orders', views.CustomerOrderViewSet, basename='customer-orders')
 
 
-urlpatterns = router.urls + brands_router.urls + customer_router.urls
+urlpatterns =[
+    path('change-password/', views.change_password, name='change_password'),
+    path('update-profile/', views.update_profile, name='update_profile'), # <--- Add this line
+] + router.urls + brands_router.urls + customer_router.urls
