@@ -19,5 +19,14 @@ customer_router.register('orders', views.CustomerOrderViewSet, basename='custome
 
 urlpatterns =[
     path('change-password/', views.change_password, name='change_password'),
-    path('update-profile/', views.update_profile, name='update_profile'), # <--- Add this line
+    path('update-profile/', views.update_profile, name='update_profile'),
+    path('api/send-otp/', views.send_otp_view, name='send_otp'),
+    path('api/verify-otp/', views.verify_otp_view, name='verify_otp'),
+    path('', views.landing_page, name='home'),
+    path('api/send-change-phone-otp/', views.send_change_phone_otp, name='send_change_phone_otp'),
+    path('api/verify-change-phone/', views.verify_change_phone_otp, name='verify_change_phone_otp'),
+    path('api/send-change-phone-otp/', views.send_change_phone_otp, name='send_change_phone_otp'),
+    path('api/verify-change-phone/', views.verify_change_phone_otp, name='verify_change_phone_otp'),
+    path('login/', views.login_page, name='login'),
+    path('signup/', views.signup_page, name='signup'), # <--- Add this line
 ] + router.urls + brands_router.urls + customer_router.urls

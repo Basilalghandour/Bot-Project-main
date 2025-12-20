@@ -10,15 +10,15 @@ from django.conf import settings
 import json
 from django.contrib.auth import update_session_auth_hash # <--- Add this
 from django.contrib.auth.decorators import login_required
-
+import random
 from .tasks import send_delayed_whatsapp
 from .shipping_services import send_order_to_delivery_company
 from .district_matching import find_best_district_match
 from .models import Brand, Order, Customer, BostaCity, BostaDistrict
 from .adapters import adapt_incoming_order
+from .services import send_whatsapp_template_message # <--- Import the new function
 from .models import *
 from .serializers import *
-from .services import send_whatsapp_text_message
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -222,7 +222,7 @@ def whatsapp_webhook(request):
 
                             # Send follow-up message
                             if reply_message:
-                                send_whatsapp_text_message(order.customer.phone, reply_message)
+                                send_whatsapp_template_message(order.customer.phone, reply_message)
                         
                         else:
                             print(f"DEBUG: Ignoring duplicate reply for Order {order_id}.")
@@ -288,13 +288,15 @@ def signup_page(request):
 
 
 def signup_page(request):
-    """Handles Brand Sign Up logic with Field-Specific Validations."""
+    """Handles Brand Sign Up logic."""
     if request.method == 'POST':
-        # 1. Get data
+        # 1. Get Form Data
         first_name = request.POST.get('first_name', '').strip()
         last_name = request.POST.get('last_name', '').strip()
         email = request.POST.get('email', '').strip()
-        phone = request.POST.get('phone', '').strip()
+        # Note: We still get phone from POST for form repopulation, 
+        # but we will use the SESSION phone for the database.
+        phone_input = request.POST.get('phone', '').strip()
         password = request.POST.get('password', '')
         confirm_password = request.POST.get('confirm_password', '')
         
@@ -302,70 +304,47 @@ def signup_page(request):
         website = request.POST.get('website', '').strip()
         delivery_company = request.POST.get('delivery_company', '')
 
-        # Store data to repopulate form on error
         form_data = {
-            'first_name': first_name,
-            'last_name': last_name,
-            'email': email,
-            'phone': phone,
-            'brand_name': brand_name,
-            'website': website,
-            'delivery_company': delivery_company,
+            'first_name': first_name, 'last_name': last_name, 'email': email,
+            'phone': phone_input, 'brand_name': brand_name, 
+            'website': website, 'delivery_company': delivery_company,
         }
         
         errors = {}
 
         # --- VALIDATIONS ---
+        if not first_name: errors['first_name'] = "First Name is required."
+        if not last_name: errors['last_name'] = "Last Name is required."
+        if not email: errors['email'] = "Email is required."
+        if not brand_name: errors['brand_name'] = "Brand Name is required."
+        if not delivery_company: errors['delivery_company'] = "Select a delivery partner."
         
-        # Step 1 Validations
-        if not first_name:
-            errors['first_name'] = "First Name is required."
-        if not last_name:
-            errors['last_name'] = "Last Name is required."
-        if not email:
-            errors['email'] = "Email Address is required."
-        if not phone:
-            errors['phone'] = "Phone Number is required."
-        if not password:
-            errors['password'] = "Password is required."
-        
-        # Step 2 Validations
-        if not brand_name:
-            errors['brand_name'] = "Brand Name is required."
-        if not delivery_company:
-            errors['delivery_company'] = "Please select a delivery partner."
+        # Security: Check Verification
+        verified_phone = request.session.get('signup_phone')
+        is_verified = request.session.get('is_phone_verified')
 
-        # Logic Checks
-        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-        if email and not re.match(email_regex, email):
-            errors['email'] = "Enter a valid email address."
+        if not is_verified or not verified_phone:
+            messages.error(request, "Please verify your phone number via WhatsApp first.")
+            return render(request, "signup.html", {'form_data': form_data})
 
-        if phone and not re.match(r'^\+?[\d\s-]{10,15}$', phone):
-            errors['phone'] = "Enter a valid phone number."
-
-        if password:
-            if len(password) < 8:
-                errors['password'] = "Must be at least 8 characters."
-            elif not any(char.isalpha() for char in password):
-                errors['password'] = "Must contain at least one letter."
-
-        if confirm_password != password:
+        # Password Checks
+        if len(password) < 8:
+            errors['password'] = "Min 8 chars required."
+        if password != confirm_password:
             errors['confirm_password'] = "Passwords do not match."
-        
-        if 'email' not in errors:
-            if User.objects.filter(username=email).exists():
-                errors['email'] = "An account with this email already exists."
-        if 'phone' not in errors:
-            if Brand.objects.filter(phone_number=phone).exists():
-                errors['phone'] = "This phone number is already registered."
 
-        # --- IF ERRORS EXIST ---
+        # Duplicate Checks
+        if User.objects.filter(username=email).exists():
+            errors['email'] = "This email is already registered."
+        if Brand.objects.filter(phone_number=verified_phone).exists():
+            errors['phone'] = "This phone number is already registered."
+
         if errors:
             return render(request, "signup.html", {'form_data': form_data, 'errors': errors})
 
-        # --- SUCCESS ---
+        # --- CREATE ACCOUNT ---
         try:
-            # Create User with First/Last Name
+            # 1. Create User
             user = User.objects.create_user(
                 username=email, 
                 email=email, 
@@ -373,20 +352,28 @@ def signup_page(request):
                 first_name=first_name,
                 last_name=last_name
             )
-            user.save()
-
-            # Create Brand
+            
+            # 2. Create Brand (Use VERIFIED phone, not input)
             Brand.objects.create(
                 user=user,
                 name=brand_name,
                 website=website,
                 contact_email=email,
-                phone_number=phone,
+                phone_number=verified_phone, # <--- SECURE
                 delivery_company=delivery_company
             )
 
+            # 3. Log In Immediately
             login(request, user)
-            return redirect('home')
+            
+            # 4. Cleanup Session
+            request.session.pop('signup_otp', None)
+            request.session.pop('signup_phone', None)
+            request.session.pop('is_phone_verified', None)
+
+            # 5. Redirect to Dashboard
+            # 'home' maps to landing_page, which auto-shows dashboard for logged-in users
+            return redirect('home') 
 
         except Exception as e:
             messages.error(request, f"System Error: {e}")
@@ -542,3 +529,242 @@ def update_profile(request):
         return redirect('/?tab=settings')
 
     return redirect('/')
+
+
+# In orders/views.py
+
+def send_otp_view(request):
+    email = request.GET.get('email', '').strip()
+    raw_phone = request.GET.get('phone', '').strip()
+    
+    # --- 1. CLEAN PHONE NUMBER ---
+    # Remove spaces, dashes, and plus signs
+    phone = raw_phone.replace(" ", "").replace("-", "").replace("+", "")
+    
+    # Logic: Only fix if it starts with '0' (e.g., 010... -> 2010...)
+    if phone.startswith("0"):
+        phone = "2" + phone
+        
+    # NOTE: We REMOVED the logic that blindly added "2" to other numbers.
+    # Now, if someone types "1090092111" (10 digits), it enters validation as-is and fails.
+
+    # --- 2. VALIDATE LENGTH ---
+    # Egyptian numbers (International format 2010...) must be exactly 12 digits.
+    if len(phone) != 12:
+        return JsonResponse({'errors': {'phone': "Invalid phone number."}}, status=400)
+    
+    # Check digits only
+    if not phone.isdigit():
+        return JsonResponse({'errors': {'phone': "Phone number must contain only digits."}}, status=400)
+
+    errors = {}
+
+    # --- 3. DUPLICATE CHECKS ---
+    if User.objects.filter(username=email).exists():
+        errors['email'] = "This email is already registered."
+    
+    if Brand.objects.filter(phone_number=phone).exists():
+        errors['phone'] = "This phone number is already registered."
+
+    if errors:
+        return JsonResponse({'errors': errors}, status=400)
+
+    # --- 4. GENERATE OTP ---
+    otp_code = str(random.randint(1000, 9999))
+    request.session['signup_otp'] = otp_code
+    request.session['signup_phone'] = phone
+    
+    print(f"DEBUG: Generated OTP for {phone}: {otp_code}")
+
+    # --- 5. SEND WHATSAPP TEMPLATE ---
+    try:
+        template_name = "verification_code" 
+        
+        # Explicitly passing language_code='en_US' based on your template
+        response_data = send_whatsapp_template_message(
+            phone, 
+            template_name, 
+            [otp_code], 
+            language_code='en_US'
+        )
+        
+        if 'error' in response_data:
+            print(f"WHATSAPP API ERROR: {response_data}")
+            return JsonResponse({'error': 'WhatsApp API Error'}, status=500)
+            
+        print(f"DEBUG: WhatsApp Response: {response_data}")
+
+    except Exception as e:
+        print(f"Error sending WhatsApp OTP: {e}")
+        return JsonResponse({'error': 'Failed to send WhatsApp message'}, status=500)
+
+    return JsonResponse({'status': 'sent'})
+
+
+def verify_otp_view(request):
+    """
+    Checks if the entered code matches the session OTP.
+    """
+    entered_code = request.GET.get('code', '').strip()
+    session_code = request.session.get('signup_otp')
+    
+    if not session_code:
+        return JsonResponse({'error': 'OTP expired. Please resend.'}, status=400)
+
+    if entered_code == session_code:
+        # Mark as verified
+        request.session['is_phone_verified'] = True
+        return JsonResponse({'status': 'verified'})
+    else:
+        return JsonResponse({'error': 'Incorrect code. Please try again.'}, status=400)
+    
+
+
+@login_required
+def send_change_phone_otp(request):
+    """
+    Sends OTP to a NEW phone number for an existing user.
+    """
+    raw_phone = request.GET.get('phone', '').strip()
+    
+    # --- 1. CLEAN PHONE NUMBER (Same logic as Signup) ---
+    phone = raw_phone.replace(" ", "").replace("-", "").replace("+", "")
+    if phone.startswith("0"):
+        phone = "2" + phone
+        
+    # --- 2. VALIDATE ---
+    if len(phone) != 12:
+        return JsonResponse({'error': "Invalid phone number."}, status=400)
+    if not phone.isdigit():
+        return JsonResponse({'error': "Phone number must contain only digits."}, status=400)
+        
+    # --- 3. DUPLICATE CHECK ---
+    # Check if taken by ANYONE ELSE (exclude current user in case they re-enter same number)
+    if Brand.objects.filter(phone_number=phone).exclude(user=request.user).exists():
+        return JsonResponse({'error': "This phone number is already registered to another account."}, status=400)
+
+    # --- 4. GENERATE & SEND ---
+    otp_code = str(random.randint(1000, 9999))
+    
+    # Store in session with UNIQUE keys (different from signup keys)
+    request.session['change_phone_otp'] = otp_code
+    request.session['change_phone_new_number'] = phone
+    
+    print(f"DEBUG: Generated Change-Phone OTP for {phone}: {otp_code}")
+
+    try:
+        template_name = "verification_code" 
+        send_whatsapp_template_message(phone, template_name, [otp_code], language_code='en_US')
+    except Exception as e:
+        print(f"Error sending WhatsApp OTP: {e}")
+        return JsonResponse({'error': 'Failed to send WhatsApp message'}, status=500)
+
+    return JsonResponse({'status': 'sent'})
+
+
+@login_required
+def verify_change_phone_otp(request):
+    """
+    Verifies the OTP and IMMEDIATELY updates the database.
+    """
+    entered_code = request.GET.get('code', '').strip()
+    session_code = request.session.get('change_phone_otp')
+    new_phone = request.session.get('change_phone_new_number')
+    
+    if not session_code or not new_phone:
+        return JsonResponse({'error': 'Session expired. Please request a new code.'}, status=400)
+
+    if entered_code == session_code:
+        # --- SUCCESS: UPDATE DB ---
+        brand = request.user.brand
+        brand.phone_number = new_phone
+        brand.save()
+        
+        # Clear session
+        request.session.pop('change_phone_otp', None)
+        request.session.pop('change_phone_new_number', None)
+        
+        return JsonResponse({'status': 'verified', 'message': 'Phone number updated successfully!'})
+    else:
+        return JsonResponse({'error': 'Incorrect code.'}, status=400)
+    
+
+
+@login_required
+def send_change_phone_otp(request):
+    """
+    Sends OTP to a NEW phone number for an existing user.
+    Uses EXACTLY the same cleaning/validation logic as signup.
+    """
+    raw_phone = request.GET.get('phone', '').strip()
+    
+    # --- 1. CLEAN PHONE NUMBER (Exact same logic as Signup) ---
+    phone = raw_phone.replace(" ", "").replace("-", "").replace("+", "")
+    
+    # Logic: Only fix if it starts with '0' (e.g., 010... -> 2010...)
+    if phone.startswith("0"):
+        phone = "2" + phone
+
+    # --- 2. VALIDATE ---
+    if len(phone) != 12:
+        return JsonResponse({'error': "Invalid phone number."}, status=400)
+    
+    if not phone.isdigit():
+        return JsonResponse({'error': "Phone number must contain only digits."}, status=400)
+        
+    # --- 3. DUPLICATE CHECK ---
+    # Check if taken by ANYONE ELSE (exclude current user so they can re-verify their own if needed)
+    if Brand.objects.filter(phone_number=phone).exclude(user=request.user).exists():
+        return JsonResponse({'error': "This phone number is already registered to another account."}, status=400)
+
+    # --- 4. GENERATE & SEND ---
+    otp_code = str(random.randint(1000, 9999))
+    
+    # Store in session with UNIQUE keys for this specific action
+    request.session['change_phone_otp'] = otp_code
+    request.session['change_phone_new_number'] = phone
+    
+    print(f"DEBUG: Generated Change-Phone OTP for {phone}: {otp_code}")
+
+    try:
+        template_name = "verification_code" 
+        # Ensure language_code matches your template (e.g. 'en_US')
+        send_whatsapp_template_message(phone, template_name, [otp_code], language_code='en_US')
+    except Exception as e:
+        print(f"Error sending WhatsApp OTP: {e}")
+        return JsonResponse({'error': 'Failed to send WhatsApp message'}, status=500)
+
+    return JsonResponse({'status': 'sent'})
+
+
+@login_required
+def verify_change_phone_otp(request):
+    """
+    Verifies the OTP and IMMEDIATELY updates the user's Brand.
+    """
+    entered_code = request.GET.get('code', '').strip()
+    session_code = request.session.get('change_phone_otp')
+    new_phone = request.session.get('change_phone_new_number')
+    
+    if not session_code or not new_phone:
+        return JsonResponse({'error': 'Session expired. Please request a new code.'}, status=400)
+
+    if entered_code == session_code:
+        # --- SUCCESS: UPDATE DB ---
+        try:
+            brand = request.user.brand
+            brand.phone_number = new_phone
+            brand.save()
+            
+            # Clear session
+            request.session.pop('change_phone_otp', None)
+            request.session.pop('change_phone_new_number', None)
+            
+            # --- NEW: Add Success Message for the next page load ---
+            messages.success(request, "Phone number updated successfully!")
+            
+            return JsonResponse({'status': 'verified'})
+        except Brand.DoesNotExist:
+             return JsonResponse({'error': 'Brand profile not found.'}, status=400)
+    else:
+        return JsonResponse({'error': 'Incorrect code.'}, status=400)

@@ -23,6 +23,7 @@
             --text-dark-grey: #6b6b6b;
             --status-pending: #f39c12;
             --status-cancelled: #e74c3c;
+            --error-red: #ff4d4f;
             --font-family: 'Inter', sans-serif;
         }
 
@@ -125,54 +126,34 @@
             width: 100%; padding: 10px; background: #121212; border: 1px solid var(--border-color); 
             color: white; border-radius: 6px; outline: none; transition: all 0.2s;
         }
+        
+        /* Error Message Style */
+        .error-msg { color: var(--error-red); font-size: 0.85rem; margin-top: 5px; display: block; font-weight: 500; }
+        .form-input.has-error { border-color: var(--error-red) !important; }
 
         /* --- NEW: GLOBAL READONLY STYLE --- */
-        /* This applies the "no-drop" cursor and dimming to ALL read-only fields */
-        .form-input[readonly] {
-            cursor: not-allowed;
-            opacity: 0.7; 
-        }
+        .form-input[readonly] { cursor: not-allowed; opacity: 0.7; }
 
         /* --- EDIT MODE & BUTTONS --- */
         .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         
         .edit-btn {
-            background: var(--primary-green);
-            border: 1px solid var(--primary-green);
-            color: #121212;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
+            background: var(--primary-green); border: 1px solid var(--primary-green); color: #121212;
+            padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;
         }
         .edit-btn svg { width: 14px; height: 14px; stroke: #121212; transition: stroke 0.3s ease; }
-        
-        .edit-btn:hover {
-            background: #2c2c2c;
-            border-color: #2c2c2c;
-            color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
+        .edit-btn:hover { background: #2c2c2c; border-color: #2c2c2c; color: white; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
         .edit-btn:hover svg { stroke: white; }
 
-        /* When editing is active, we force the cursor back to text and full opacity */
         .form-input.editable-active {
-            border-color: #2ecc71 !important;
-            box-shadow: 0 0 8px rgba(46, 204, 113, 0.2);
-            cursor: text !important;
-            background-color: #1a1a1a;
-            opacity: 1 !important; 
+            border-color: #2ecc71 !important; box-shadow: 0 0 8px rgba(46, 204, 113, 0.2);
+            cursor: text !important; background-color: #1a1a1a; opacity: 1 !important; 
         }
 
         .btn-save {
             background-color: var(--primary-green); color: #121212; border: none; padding: 10px 20px;
-            border-radius: 6px; font-weight: 600; cursor: pointer;
-            transition: opacity 0.2s;
+            border-radius: 6px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
         }
         .btn-save:hover { opacity: 0.9; }
 
@@ -186,48 +167,34 @@
         .custom-select-wrapper { position: relative; width: 100%; display: none; }
         .custom-select-trigger {
             position: relative; display: flex; align-items: center; justify-content: space-between;
-            width: 100%; padding: 10px;
-            background-color: #121212;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: white; font-size: 15px;
-            cursor: pointer; transition: all 0.2s ease;
+            width: 100%; padding: 10px; background-color: #121212; border: 1px solid var(--border-color);
+            border-radius: 6px; color: white; font-size: 15px; cursor: pointer; transition: all 0.2s ease;
         }
         .custom-select-trigger.has-value { color: white; }
-        
         .custom-select-wrapper.editable-active .custom-select-trigger {
-            border-color: #2ecc71 !important;
-            box-shadow: 0 0 8px rgba(46, 204, 113, 0.2);
-            background-color: #1a1a1a;
+            border-color: #2ecc71 !important; box-shadow: 0 0 8px rgba(46, 204, 113, 0.2); background-color: #1a1a1a;
         }
-
         .custom-select.open .custom-select-trigger {
-            border-color: var(--primary-green); 
-            border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+            border-color: var(--primary-green); border-bottom-left-radius: 0; border-bottom-right-radius: 0;
         }
         .arrow {
             width: 1rem; height: 1rem;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232ecc71'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat; background-position: center; background-size: contain;
-            transition: transform 0.3s;
+            background-repeat: no-repeat; background-position: center; background-size: contain; transition: transform 0.3s;
         }
         .custom-select.open .arrow { transform: rotate(180deg); }
-        
         .custom-options {
-            position: absolute; display: block; top: 100%; left: 0; right: 0;
-            background-color: var(--card-bg);
+            position: absolute; display: block; top: 100%; left: 0; right: 0; background-color: var(--card-bg);
             border: 1px solid var(--primary-green); border-top: none;
             border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 1000;
             opacity: 0; visibility: hidden; pointer-events: none;
-            transform: translateY(-10px); transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25);
-            overflow: hidden;
+            transform: translateY(-10px); transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25); overflow: hidden;
         }
         .custom-select.open .custom-options { opacity: 1; visibility: visible; pointer-events: all; transform: translateY(0); }
-        
         .custom-option {
-            padding: 10px; font-size: 0.9rem; color: #e0e0e0;
-            cursor: pointer; transition: all 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 10px; font-size: 0.9rem; color: #e0e0e0; cursor: pointer; transition: all 0.2s;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .custom-option:last-child { border-bottom: none; }
         .custom-option:hover { background-color: var(--primary-green); color: #121212; padding-left: 1.5rem; }
@@ -240,8 +207,6 @@
         .alert.fade-out { opacity: 0; }
         .alert-success { background-color: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
         .alert-error { background-color: rgba(231, 76, 60, 0.2); color: #e74c3c; border: 1px solid #e74c3c; }
-        .error-msg { color: #e74c3c; font-size: 0.85rem; margin-top: 5px; display: block; font-weight: 500; }
-        .form-input.has-error { border-color: #e74c3c !important; }
 
         /* --- MODALS --- */
         .modal-overlay {
@@ -265,6 +230,8 @@
             background-color: #121212; color: white; font-size: 1.5rem; text-align: center; font-weight: bold;
         }
         .otp-input:focus { border-color: var(--primary-green); outline: none; box-shadow: 0 0 10px rgba(46, 204, 113, 0.3); }
+        .otp-input.input-error { border-color: var(--error-red); } /* Added for OTP error state */
+        
         #phone-step-2 { display: none; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -325,7 +292,8 @@
                 <p style="color:var(--text-grey); margin-bottom:15px; font-size:0.9rem;">Please enter your new mobile number. We will send a verification code.</p>
                 <div class="form-group">
                     <label class="form-label">New Phone Number</label>
-                    <input type="text" id="newPhoneNumber" class="form-input" placeholder="+20 1xxxxxxxxx">
+                    <input type="text" id="newPhoneNumber" class="form-input" placeholder="">
+                    <div id="change-phone-error" class="error-msg" style="display:none;"></div>
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" onclick="closePhoneModal()">Cancel</button>
@@ -342,6 +310,8 @@
                     <input type="text" class="otp-input" maxlength="1" oninput="handleOtpInput(this)">
                     <input type="text" class="otp-input" maxlength="1" oninput="handleOtpInput(this)">
                 </div>
+
+                <div id="otp-error" class="error-msg" style="display:none; text-align: center; margin-bottom: 15px;"></div>
 
                 <div style="text-align: center; margin-bottom: 20px;">
                     <button type="button" onclick="resendCode()" style="background:none; border:none; color:var(--text-grey); font-size:0.85rem; cursor:pointer; text-decoration:underline;">
@@ -478,7 +448,7 @@
                 
                             <div class="form-group">
                                 <label class="form-label">Phone Number</label>
-                                <input type="text" class="form-input" value="{{ brand.phone_number }}" readonly>
+                                <input type="text" class="form-input" value="+{{ brand.phone_number }}" readonly>
                                 <button type="button" class="btn-change-phone" onclick="openPhoneModal()">Change Number</button>
                             </div>
                 
@@ -650,35 +620,150 @@
             editBtn.style.display = 'inline-flex';
         }
 
-        /* --- PHONE MODAL --- */
+        /* --- PHONE MODAL & BACKEND LOGIC --- */
         const phoneModal = document.getElementById('phoneModal');
+        const phoneInput = document.getElementById('newPhoneNumber');
+        const changePhoneError = document.getElementById('change-phone-error');
+        const otpError = document.getElementById('otp-error');
+        const resendMsg = document.getElementById('resendMsg');
+
         function openPhoneModal() {
             phoneModal.style.display = 'flex';
             document.getElementById('phone-step-1').style.display = 'block';
             document.getElementById('phone-step-2').style.display = 'none';
             document.getElementById('phoneModalTitle').innerText = "Change Phone Number";
+            phoneInput.value = ""; // Clear input
+            
+            // Clear errors
+            changePhoneError.style.display = 'none';
+            otpError.style.display = 'none';
+            document.querySelectorAll('.otp-input').forEach(el => el.classList.remove('input-error'));
+            
+            resendMsg.style.display = 'none';
         }
-        function closePhoneModal() { phoneModal.style.display = 'none'; }
-        phoneModal.addEventListener('click', (e) => { if (e.target === phoneModal) closePhoneModal(); });
 
+        function closePhoneModal() {
+            phoneModal.style.display = 'none';
+            document.querySelectorAll('.otp-input').forEach(input => input.value = '');
+        }
+
+        phoneModal.addEventListener('click', (e) => { 
+            if (e.target === phoneModal) closePhoneModal(); 
+        });
+
+        // --- STEP 1: SEND OTP ---
         function goToStep2() {
-            document.getElementById('phone-step-1').style.display = 'none';
-            document.getElementById('phone-step-2').style.display = 'block';
-            document.getElementById('phoneModalTitle').innerText = "Verify Number";
-            const inputs = document.querySelectorAll('.otp-input');
-            if(inputs.length > 0) inputs[0].focus();
+            const phone = phoneInput.value.trim();
+            changePhoneError.style.display = 'none';
+            
+            if (!phone) {
+                changePhoneError.innerText = "Please enter a phone number.";
+                changePhoneError.style.display = 'block';
+                return;
+            }
+
+            // Loading State
+            const nextBtn = document.querySelector('#phone-step-1 .btn-save');
+            const originalText = nextBtn.innerText;
+            nextBtn.innerText = "Sending...";
+            nextBtn.disabled = true;
+
+            // Call Backend
+            fetch(`{% url 'send_change_phone_otp' %}?phone=${encodeURIComponent(phone)}`)
+                .then(response => response.json())
+                .then(data => {
+                    nextBtn.innerText = originalText;
+                    nextBtn.disabled = false;
+
+                    if (data.error) {
+                        changePhoneError.innerText = data.error;
+                        changePhoneError.style.display = 'block';
+                    } else if (data.status === 'sent') {
+                        // Success -> Step 2
+                        document.getElementById('phone-step-1').style.display = 'none';
+                        document.getElementById('phone-step-2').style.display = 'block';
+                        document.getElementById('phoneModalTitle').innerText = "Verify Number";
+                        setTimeout(() => document.querySelector('.otp-input').focus(), 100);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    nextBtn.innerText = originalText;
+                    nextBtn.disabled = false;
+                    changePhoneError.innerText = "System error. Please try again.";
+                    changePhoneError.style.display = 'block';
+                });
         }
 
+        // --- STEP 2: VERIFY OTP ---
+        function verifyAndClose() {
+            let code = "";
+            document.querySelectorAll('.otp-input').forEach(input => code += input.value);
+            
+            otpError.style.display = 'none';
+            document.querySelectorAll('.otp-input').forEach(el => el.classList.remove('input-error'));
+
+            if (code.length !== 4) {
+                otpError.innerText = "Please enter the full 4-digit code.";
+                otpError.style.display = 'block';
+                return;
+            }
+
+            const verifyBtn = document.querySelector('#phone-step-2 .btn-save');
+            verifyBtn.innerText = "Verifying...";
+            verifyBtn.disabled = true;
+
+            // Call Backend
+            fetch(`{% url 'verify_change_phone_otp' %}?code=${code}`)
+                .then(response => response.json())
+                .then(data => {
+                    verifyBtn.innerText = "Verify";
+                    verifyBtn.disabled = false;
+
+                    if (data.status === 'verified') {
+                        // Success!
+                        closePhoneModal();
+                        // Force a clean GET reload to avoid "Confirm Form Resubmission" alerts
+                        window.location.href = "{% url 'home' %}?tab=settings";
+                    } else {
+                        otpError.innerText = data.error || "Incorrect code.";
+                        otpError.style.display = 'block';
+                        document.querySelectorAll('.otp-input').forEach(el => el.classList.add('input-error'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    verifyBtn.innerText = "Verify";
+                    verifyBtn.disabled = false;
+                    otpError.innerText = "Verification failed. Try again.";
+                    otpError.style.display = 'block';
+                });
+        }
+
+        // --- RESEND LOGIC ---
         function resendCode() {
-            const msg = document.getElementById('resendMsg');
-            msg.style.display = 'block';
-            setTimeout(() => { msg.style.display = 'none'; }, 3000);
+            const phone = phoneInput.value.trim();
+            
+            fetch(`{% url 'send_change_phone_otp' %}?phone=${encodeURIComponent(phone)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'sent') {
+                        resendMsg.style.display = 'block';
+                        resendMsg.innerText = "Code sent successfully!";
+                        setTimeout(() => { resendMsg.style.display = 'none'; }, 3000);
+                    } else {
+                        otpError.innerText = data.error || "Could not resend code.";
+                        otpError.style.display = 'block';
+                    }
+                });
         }
 
-        function verifyAndClose() { closePhoneModal(); }
-
-        /* --- OTP LOGIC --- */
+        /* --- OTP INPUT HANDLER --- */
         function handleOtpInput(element) {
+            // Clear error style on typing
+            document.querySelectorAll('.otp-input').forEach(el => el.classList.remove('input-error'));
+            otpError.style.display = 'none';
+
             if (element.value.length === 1) {
                 const nextInput = element.nextElementSibling;
                 if (nextInput && nextInput.tagName === 'INPUT') nextInput.focus();
@@ -706,7 +791,7 @@
                 }
             } catch(e) {}
 
-            const successAlerts = document.querySelectorAll('.alert'); // UPDATED: Selects success AND error alerts
+            const successAlerts = document.querySelectorAll('.alert'); 
             if (successAlerts.length > 0) {
                 setTimeout(function() {
                     successAlerts.forEach(function(alert) {

@@ -255,7 +255,7 @@
                 
                 <div class="form-group">
                     <label for="email" class="form-label">Email Address</label>
-                    <input type="email" id="email" name="username" class="form-input {% if errors.username %}input-error{% endif %}" placeholder="name@company.com" value="{{ username|default:'' }}" required>
+                    <input type="email" id="email" name="username" class="form-input {% if errors.username %}input-error{% endif %}" placeholder="" value="{{ username|default:'' }}" required>
                     {% if errors.username %}
                         <span class="field-error">{{ errors.username }}</span>
                     {% endif %}
