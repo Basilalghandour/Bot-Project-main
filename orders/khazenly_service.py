@@ -167,10 +167,10 @@ class KhazenlyService:
             sku_val = item.sku if item.sku else item.product_name
             
             line_items.append({
-                "itemName": item.product_name,
-                "sku": sku_val, 
-                "price": price,
-                "quantity": item.quantity,
+                "ItemName": item.product_name,
+                "SKU": sku_val, 
+                "Price": price,
+                "Quantity": item.quantity,
                 "discountAmount": 0
             })
             items_total_price += (price * item.quantity)
