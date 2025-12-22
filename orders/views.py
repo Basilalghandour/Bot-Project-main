@@ -16,8 +16,7 @@ from .shipping_services import send_order_to_delivery_company
 from .district_matching import find_best_district_match
 from .models import Brand, Order, Customer, BostaCity, BostaDistrict
 from .adapters import adapt_incoming_order
-from .services import send_whatsapp_template_message # <--- Import the new function
-from .models import *
+from .services import send_whatsapp_template_message, send_whatsapp_text_message
 from .serializers import *
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -222,7 +221,7 @@ def whatsapp_webhook(request):
 
                             # Send follow-up message
                             if reply_message:
-                                send_whatsapp_template_message(order.customer.phone, reply_message)
+                                send_whatsapp_text_message(order.customer.phone, reply_message)
                         
                         else:
                             print(f"DEBUG: Ignoring duplicate reply for Order {order_id}.")
