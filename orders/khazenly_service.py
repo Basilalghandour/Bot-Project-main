@@ -221,6 +221,7 @@ class KhazenlyService:
         }
         
         print(f"KHAZENLY: Sending Order {order.id} to {self.api_url}...")
+        print(f"DEBUG PAYLOAD: {payload}")
         
         try:
             response = requests.post(f"{self.api_url}/CreateOrder", json=payload, headers=headers)
