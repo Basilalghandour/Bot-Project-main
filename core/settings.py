@@ -139,6 +139,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 WHATSAPP_API_TOKEN = 'EAAVmDklUHfEBP3NctRJSs1uGn7uhyIXaKbFusZA0yZB3LpdXFZAXwB9tyW1DUd7RiVfY4072ijiCB0WZCO1xtBAhXTKxImNlzOxDNhWvPjdYvTG9HD3R5eiz89EL94ZAQNhhn9VBjXCDWHR49gxZCiZBdCvs0hNrk786Dc3e3nYoq7T7n6pnRony0fESkXv7QZDZD'
 WHATSAPP_PHONE_NUMBER_ID = '779987841875297' # e.g., 880000232387668
-WHATSAPP_TEMPLATE_NAME = 'confirming_orders4' # The name of the template you want to send7
+WHATSAPP_TEMPLATE_NAME = 'order_confirmation' # The name of the template you want to send7
 
 WHATSAPP_VERIFY_TOKEN = 'ghandour+123' # A token you set to verify the webhook

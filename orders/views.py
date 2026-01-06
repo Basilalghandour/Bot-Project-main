@@ -277,15 +277,6 @@ def landing_page(request):
 
 # In orders/views.py
 
-def login_page(request):
-    """Renders the simple Login page."""
-    return render(request, "login.html")
-
-def signup_page(request):
-    """Renders the simple Sign Up page."""
-    return render(request, "signup.html")
-
-
 def signup_page(request):
     """Handles Brand Sign Up logic."""
     if request.method == 'POST':
@@ -382,31 +373,38 @@ def signup_page(request):
 
 
 def login_page(request):
-    """Handles Brand Login logic with Field Errors."""
+    """Handles Brand Login logic with Specific Field Errors."""
     if request.method == 'POST':
         email = request.POST.get('username', '').strip()
         password = request.POST.get('password', '')
         
         errors = {}
         
+        # 1. Basic Required Checks
         if not email:
             errors['username'] = "Email is required."
         if not password:
             errors['password'] = "Password is required."
             
+        # 2. Advanced Logic (Only if basic checks pass)
         if not errors:
-            user = authenticate(request, username=email, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('home')
+            # Step A: Check if email exists in DB
+            if not User.objects.filter(username=email).exists():
+                errors['username'] = "No account found with this email."
             else:
-                # Attach invalid credentials error to the password field or a general error
-                errors['detail'] = "Invalid email or password."
+                # Step B: Email exists, try to authenticate (check password)
+                user = authenticate(request, username=email, password=password)
+                if user is not None:
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    # If user exists but auth fails, it's the password
+                    errors['password'] = "Incorrect password."
 
+        # Pass 'username' back so the user doesn't have to re-type it
         return render(request, "login.html", {'username': email, 'errors': errors})
     
     return render(request, "login.html")
-
 
 def landing_page(request):
     # If user is logged in, show them their dashboard

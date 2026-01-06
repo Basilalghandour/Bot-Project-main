@@ -404,19 +404,29 @@
         const otpErrorDiv = document.getElementById('otp-global-error');
 
         function openVerificationModal(phone) {
-
             let formattedPhone = phone.trim();
-            if (!formattedPhone.startsWith('+')) {
-                formattedPhone = '+' + formattedPhone;
-                  }
+            
+            // 1. Remove existing '+' so we can process clean numbers
+            if (formattedPhone.startsWith('+')) {
+                formattedPhone = formattedPhone.substring(1);
+            }
 
+            // 2. Logic: If number starts with '0', prepend '2' (e.g. 010... becomes 2010...)
+            // This visually matches your backend logic for Egyptian numbers
+            if (formattedPhone.startsWith('0')) {
+                formattedPhone = '2' + formattedPhone;
+            }
+
+            // 3. Add the '+' back at the start for display
+            formattedPhone = '+' + formattedPhone;
+
+            // 4. Update the display text (This was the missing link!)
             displayPhone.innerText = formattedPhone;
+            
             modal.style.display = 'flex';
-            otpErrorDiv.style.display = 'none'; // Clear previous errors
+            otpErrorDiv.style.display = 'none'; 
             
-            // Start timer immediately upon opening (code was just sent)
             startResendTimer();
-            
             setTimeout(() => document.querySelector('.otp-input').focus(), 100);
         }
 
